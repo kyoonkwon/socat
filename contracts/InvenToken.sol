@@ -88,8 +88,8 @@ contract INVENToken is ERC20Interface, SafeMath {
         name = "SKP Token";
         decimals = 2;
         _totalSupply = 10000000;
-        balances[0x3c151402Ca4A8BA77168dB889C37312cC4E29228] = _totalSupply;
-        emit Transfer(address(0), 0x3c151402Ca4A8BA77168dB889C37312cC4E29228, _totalSupply);
+        balances[0x4d6193fD649900438f853bA9e77e0598B9eBb74B] = _totalSupply;
+        emit Transfer(address(0), 0x4d6193fD649900438f853bA9e77e0598B9eBb74B, _totalSupply);
     }
 
 
