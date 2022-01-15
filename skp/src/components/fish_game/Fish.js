@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import fishImg from './image/fish.png'
 
 const useStyles = makeStyles(theme => ({
@@ -8,9 +8,8 @@ const useStyles = makeStyles(theme => ({
     } ,
     character: {
         position: 'absolute',
-        width: '80px',
-        height: '120px',
-        left: '150px',
+        width: '10px',
+        height: '10px'
     },
 }))
 
@@ -18,9 +17,12 @@ export default function Fish(props) {
     
     let [img, changeImg] = useState('🐟')
 
+    const classes = useStyles();
+
     return (
-        <span>
-            🐟
-        </span>
+        <div>
+           <img id="fish" src= {fishImg} 
+           height="100" weight="100" classmName={classes.character}/>
+        </div>
     )
 }
