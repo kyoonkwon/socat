@@ -66,10 +66,11 @@ contract CatBase is MyToken{
 
 
     function updateKittyId(uint16 _to) internal returns(uint32 beforeId, uint32 afterId){
-        beforeId = _getMyCatIdx();
-        afterId = _to;
-        Cat storage cat = cats[beforeId];
-        cat.kittyId = kittyIds[afterId];
+
+        Cat storage cat = cats[_getMyCatIdx()];
+        beforeId = cat.kittyId;
+        cat.kittyId = kittyIds[_to];
+        afterId = cat.kittyId;
     }
 
     function feed() public{
