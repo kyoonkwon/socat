@@ -27,15 +27,17 @@ const useStyles = makeStyles(theme => ({
     const classes = useStyles();
 
     useEffect(() => {
-        document.addEventListener('keyleft', handleKeyLeft)
-        document.addEventListener('keyright', handleKeyRight)
+        document.addEventListener('keydown', handleKeyLeft)
+        document.addEventListener('keydown', handleKeyRight)
+
+        console.log(document);
         // error : return 안으로 안들어감
         return () => {
             for(let i=0; i< timeOutList.length; ++i) {
                 clearTimeout(timeOutList[i])
             }
-            document.removeEventListener('keyleft', handleKeyLeft)
-            document.removeEventListener('keyright', handleKeyRight)
+            document.removeEventListener('keydown', handleKeyLeft)
+            document.removeEventListener('keydown', handleKeyRight)
         }
     })
 

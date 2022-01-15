@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
 
     } ,
     character: {
-        position: 'absolute',
+        position: 'absolute',       
         width: '80px',
         height: '80px'
     },
