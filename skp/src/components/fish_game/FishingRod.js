@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
   }))
 
-  const FishingRod = () => { 
+  const FishingRod = (props) => { 
     // init
     const updateTime = 20;
     const initLeft = 50;
@@ -29,6 +29,7 @@ const useStyles = makeStyles(theme => ({
     useEffect(() => {
         document.addEventListener('keyleft', handleKeyLeft)
         document.addEventListener('keyright', handleKeyRight)
+        // error : return 안으로 안들어감
         return () => {
             for(let i=0; i< timeOutList.length; ++i) {
                 clearTimeout(timeOutList[i])
@@ -37,27 +38,31 @@ const useStyles = makeStyles(theme => ({
             document.removeEventListener('keyright', handleKeyRight)
         }
     })
-    /* 키보드 이벤트 */
-    //right arrow
-    const handleKeyRight = (e) => {
-        if (e.keyCode === 39) {
-          if(!isMove) {
-            isMove = !isMove;
-            moveRight();
-          }
-        }
-    }
 
+    /* 키보드 이벤트 */
     // left arrow
     const handleKeyLeft = (e) => {
-
+        console.log("testA")
         if (e.keyCode === 37) {
           if(!isMove) {
             isMove = !isMove;
             moveLeft();
+            console.log("click left")
           }
         }
     }
+
+    //right arrow
+    const handleKeyRight = (e) => {
+        console.log("testB")
+        if (e.keyCode === 39) {
+          if(!isMove) {
+            isMove = !isMove;
+            moveRight();
+            console.log("click right")
+          }
+        }
+    } 
     /*
     // down arrow
     const handleKeyDown = (e) => {
@@ -78,7 +83,7 @@ const useStyles = makeStyles(theme => ({
       }
     }
     */
-    
+ 
     const moveRight = () => {
         for(let i=0; i<2*moveSize/speed + 1; i++){
             let timeOut = setTimeout(() => {
@@ -116,5 +121,5 @@ const useStyles = makeStyles(theme => ({
         <img id="FishingRod" src = {RodImg} className={classes.character} style={{left:left}} />
       </div>
     )
-  }
+}
 export default FishingRod;

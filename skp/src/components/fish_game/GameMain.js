@@ -98,5 +98,4 @@ function GameMain() {
         </div>
     )
 }
-
 export default GameMain;

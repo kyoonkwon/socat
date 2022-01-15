@@ -8,21 +8,22 @@ const useStyles = makeStyles(theme => ({
     } ,
     character: {
         position: 'absolute',
-        width: '10px',
-        height: '10px'
+        width: '80px',
+        height: '80px'
     },
-}))
+    }))
 
-export default function Fish(props) {
+    const Fish = (props) => {
     
-    let [img, changeImg] = useState('🐟')
+        //let [img, changeImg] = useState('🐟')
 
-    const classes = useStyles();
+        const classes = useStyles();
+        
+        return (
+            <div>
+                <img id="fish" src= {fishImg} className={classes.character}/>
+            </div>
+        )
 
-    return (
-        <div>
-           <img id="fish" src= {fishImg} 
-           height="100" weight="100" classmName={classes.character}/>
-        </div>
-    )
-}
+    }
+export default Fish;
