@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SeaImg from './image/background.jpg';
 import Fish from './Fish';
-import FishingRod from './FishingRod';
+import Fishing from './Fishing';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -23,30 +23,22 @@ const useStyles = makeStyles(() => ({
 
 function GameMain() {
     //init
-    const updateTime = 20;
     const interval = useRef();
 
     const [isStart, setIsStart] = useState(false);
-    const [time, setTime] = useState(0);
     const [result, setResult] = useState(0);
     const [isMove, setIsMove] = useState(false);
 
     useEffect(() => {
         if(isStart) {
             interval.current = setInterval(() => {
-                if(Math.floor(time)%2 === 1){
-                    setIsMove(true)
-                } else {
-                    setIsMove(false)
-                }
-                setTimeout(time + updateTime * 0.001)
-                //checkConflict();
-            }, updateTime)
+                setIsMove(true)
+            })
         }
         return () => {
             clearInterval(interval.current)
         }
-    }, [time, isStart]);
+    });
 
     const classes = useStyles();
 
@@ -57,15 +49,14 @@ function GameMain() {
     // fish, fishing rod conflict
     const checkConflict = () => {
         let fish = document.querySelector('img#fish');
-        let fishingRod = document.querySelector('img#fishingRod');
+        let fishing = document.querySelector('img#fishing');
 
-        if( fish !== null && fishingRod !== null) {
-            let dis = Math.pow(fish.x - fishingRod.x, 2) + Math.pow(fish.y - fishingRod.y, 2)
+        if( fish !== null && fishing !== null) {
+            let dis = Math.pow(fish.x - fishing.x, 2) + Math.pow(fish.y - fishing.y, 2)
             if(dis < 3000){
                 alert("낚시 성공!!")
                 //setResult 으로 낚은 물고기 보여주기
-                setIsStart(false)
-                
+                setIsStart(false)             
             }
         }
     }
@@ -76,16 +67,10 @@ function GameMain() {
                 isStart ?
                 <div id="fish_game" text-align="center">
                     <Fish />
-                    <FishingRod />
+                    <Fishing />
                     <img src={SeaImg} width="500" height="500"/>
                     <div className={classes.timer}>
                         <div>낚시 게임!</div>
-                        <div style={{ margin: "0 0 0 50px" }}> 
-                        Time : 
-                        </div>
-			            <div style={{ margin: "0 0 0 10px" }}>
-                            {Math.floor(time)}s
-                        </div>
                     </div>
                 </div>
                 :

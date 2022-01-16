@@ -15,11 +15,11 @@ const useStyles = makeStyles(theme => ({
     },
   }))
 
-  const FishingRod = (props) => { 
+  function Fishing(props) { 
     // init
     const updateTime = 20;
     const initLeft = 50;
-    const initTop = 0;
+    const initTop = -20;
     const speed = 10;
     const moveSize = 200;
     const [left, setLeft] = useState(initLeft);
@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
         document.addEventListener('keydown', handleKeyLeft)
         document.addEventListener('keydown', handleKeyRight)
 
-        // error : return 안으로 안들어감
         return () => {
             for(let i=0; i< timeOutList.length; ++i) {
                 clearTimeout(timeOutList[i])
@@ -101,8 +100,7 @@ const useStyles = makeStyles(theme => ({
     }
 
     const moveRight = () => {
-      if(left < 500)
-        setLeft(left+5);
+      setLeft(left+5);
         /*
         console.log("Right")
         
@@ -151,8 +149,8 @@ const useStyles = makeStyles(theme => ({
     // 렌더링
     return (
       <div>
-        <img id="FishingRod" src = {RodImg} className={classes.character} style={{marginLeft: `${left}`+'px', marginTop: `${top}`+'px'}} />
+        <img id="Fishing" src = {RodImg} className={classes.character} style={{marginLeft: `${left}`+'px', marginTop: `${top}`+'px'}} />
       </div>
     )
 }
-export default FishingRod;
+export default Fishing;
