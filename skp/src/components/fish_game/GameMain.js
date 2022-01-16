@@ -40,7 +40,7 @@ function GameMain() {
                     setIsMove(false)
                 }
                 setTimeout(time + updateTime * 0.001)
-                checkConflict();
+                //checkConflict();
             }, updateTime)
         }
         return () => {

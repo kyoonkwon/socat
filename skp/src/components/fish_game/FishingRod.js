@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
       position: 'absolute',
       width:'60px',
       height:'400px',
-      left: '150px',
+      left: '160px',
     },
   }))
 
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     // init
     const updateTime = 20;
     const initLeft = 50;
-    const initTop = 10;
+    const initTop = 0;
     const speed = 10;
     const moveSize = 200;
     const [left, setLeft] = useState(initLeft);
@@ -42,6 +42,8 @@ const useStyles = makeStyles(theme => ({
             }
             document.removeEventListener('keydown', handleKeyLeft)
             document.removeEventListener('keydown', handleKeyRight)
+            document.removeEventListener('keydown', handleKeyUp)
+            document.removeEventListener('keydown', handleKeyDown)
         }
     })
 
@@ -49,10 +51,10 @@ const useStyles = makeStyles(theme => ({
     // up arrow
     const handleKeyUp = (e) => {
         if (e.keyCode === 38) {
-          if(!isMove) {
+          if(!isMove && top >= -255) {
             isMove = !isMove;
             moveUp();
-            console.log("click left")
+            console.log("Top: " + top)
           }
         }
     }
@@ -60,10 +62,10 @@ const useStyles = makeStyles(theme => ({
     // down arrow
     const handleKeyDown = (e) => {
         if (e.keyCode === 40) {
-          if(!isMove) {
+          if(!isMove && top <= -5) {
             isMove = !isMove;
             moveDown();
-            console.log("click right")
+            console.log("Down: " + top)
           }
         }
     } 
@@ -71,10 +73,10 @@ const useStyles = makeStyles(theme => ({
     // left arrow
     const handleKeyLeft = (e) => {
         if (e.keyCode === 37) {
-          if(!isMove) {
+          if(!isMove && left >= -155) {
             isMove = !isMove;
             moveLeft();
-            console.log("click left")
+            console.log("Left: " + left)
           }
         }
     }
@@ -82,10 +84,10 @@ const useStyles = makeStyles(theme => ({
     //right arrow
     const handleKeyRight = (e) => {
         if (e.keyCode === 39) {
-          if(!isMove) {
+          if(!isMove && left <= 270) {
             isMove = !isMove;
             moveRight();
-            console.log("click right")
+            console.log("Right: " + left)
           }
         }
     }
@@ -99,7 +101,7 @@ const useStyles = makeStyles(theme => ({
     }
 
     const moveRight = () => {
-
+      if(left < 500)
         setLeft(left+5);
         /*
         console.log("Right")
@@ -125,6 +127,7 @@ const useStyles = makeStyles(theme => ({
     }
 
     const moveLeft = () => {
+      setLeft(left-5);
         /*
         console.log("Left")
         for(let i=0; i<2*moveSize/speed + 1; i++){
@@ -143,7 +146,7 @@ const useStyles = makeStyles(theme => ({
             timeOutList.push(timeOut)
         }
     */
-        setLeft(left-5);
+        
     }
     // 렌더링
     return (
