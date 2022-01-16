@@ -1,45 +1,66 @@
-import React from "react";
+import React, { Component } from "react";
 import { Button } from "@material-ui/core";
+import ReactCardFlip from 'react-card-flip';
 
-const Card = (props) => {
-    return (
-        <div  >
-            <div className="flip-card" style = {{"borderRadius": "100"}}>
-                <div className="flip-card-inner">
-                    <div className="flip-card-front">
-                        <img src="https://img1.kbcard.com/ST/img/cxc/kbcard/upload/img/product/09273_img.png" alt="Avatar" style={{"width":"180px", "height":"120px"}}></img>
-                    </div>
-                    <div className="flip-card-back">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNM4wH9iM0YXyG_XzAw-JMWE15meMGhiCtPA&usqp=CAU" alt="Avatar" style={{"width":"180px", "height":"120px"}}></img>
-                    </div>
-                </div>
+class FlipCard extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        isFlipped: false
+      };
+      this.handleClick = this.handleClick.bind(this);
+    }
+  
+    handleClick(e) {
+      e.preventDefault();
+      this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
+    }
+
+    render() {
+      return (
+        <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal">
+          <div className="front">
+            <div>
+                <img src={this.props.url} alt="Avatar" style={{"width":"360px", "height":"240px"}}></img>
             </div>
-            <Button variant="outlined" style= {{"marginTop" : 15}} onClick={(e)=> {this.setState({disabled : true})}}>
-                <p>
-                    {props.name} <br></br>
-                    PRICE : {props.price}
-                </p>
-            </Button>
-        </div>
-    )
-}
-// 화면을 뒤집었을 때 결제 되도록함
-// class FishingRod extends Component {
-//     constructor(props) {
-//         super(props);
-//     }
-// }
-const FishingRod = () => {
-    //20개 중에서 선택
-    const randomNumber = Math.round(Math.random() * 20 + 1);
-    console.log(randomNumber);
-    return (
-        <div style={{"display":"flex","justify-content":"space-around","columnGap" : "40px", "flex-direction" : "row", "marginTop" : 50}}>
-            <Card name = "beginner" price = "5"/>
-            <Card name = "intermediate" price = "10"/>
-            <Card name = "expert" price = "15"/>
-        </div>
-    )
-}
+                <Button  variant="outlined" style= {{"marginTop" : 50}} onClick={this.handleClick}>{this.props.name}<br></br> Price : {this.props.price}</Button>
+            </div>
+          <div className="back">
+            <div>
+                <img src={this.props.rodUrl} alt="Avatar" style={{"width":"360px", "height":"240px"}}></img>
+            </div>
+            <Button  variant="outlined" style= {{"marginTop" : 50}} onClick={this.handleClick}>{this.props.name}<br></br> Price : {this.props.price}</Button>
+            </div>
+        </ReactCardFlip>
+      );
+    }
+  }
 
+class FishingRod extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        };
+      }
+    
+      render() {
+        const rand1 = Math.floor(Math.random() * 4 + 1);
+        const rand2 = Math.floor(Math.random() * 6 + 1);
+        const rand3 = Math.floor(Math.random() * 5 + 3);
+        console.log(rand1);
+        console.log(rand2);
+        console.log(rand3);
+        const FishingRodStyle = {"display":"flex","justifyContent":"space-around","columnGap" : "40px", "flexDirection" : "row", "marginTop" : 50};
+        return (
+            <div style={FishingRodStyle}>
+                <FlipCard name = "Beginner" price = "5" url = "img/kb.png" rodUrl = {`img/rod${rand1}.webp`}></FlipCard>
+                <FlipCard name = "Intermediate" price = "10" url = "img/lotte.jpg" rodUrl = {`img/rod${rand2}.webp`}></FlipCard>
+                <FlipCard name = "Expert" price = "15" url = "img/shinhan.png" rodUrl = {`img/rod${rand3}.webp`}></FlipCard>
+            </div>
+          
+        );
+      }
+    
+}
 export default FishingRod;
