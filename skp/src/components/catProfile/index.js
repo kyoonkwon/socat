@@ -3,7 +3,8 @@ import Button from "@material-ui/core/Button"
 
 import {Card, CardMedia, CardContent, CardActions} from "@material-ui/core"
 import {Typography} from "@material-ui/core"
-import {Modal, Box, Paper} from "@material-ui/core"
+import {Modal, Box, Paper, TextField} from "@material-ui/core"
+import { GiWindowBars } from "react-icons/gi";
 
 
 export default function Profile(props) {
@@ -14,6 +15,8 @@ export default function Profile(props) {
     const [modalOpen, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [script, setScript] = useState("안녕~ 반갑다냥")
+    const [catName, setCatName] = useState("");
 
     useEffect(()=> {
         getCat();
@@ -21,6 +24,11 @@ export default function Profile(props) {
 
     useEffect(() => {
     }, [prevCats])
+
+    useEffect(() => {
+        console.log(props.script)
+        setScript(props.script);
+    }, [props.script])
     
 
     async function getCat(){
@@ -34,6 +42,7 @@ export default function Profile(props) {
         await props.instance.methods.feed().send();
         var cat = await props.instance.methods.getMyCat().call();
         setCat(cat);
+        setScript("우웩. 이걸 밥이라고 준거냥")
     }
 
     async function getPrevCats(){
@@ -53,12 +62,16 @@ export default function Profile(props) {
     }
 
     async function registerCat(){
-        await props.instance.methods.registerCat("이우진").send();
+        if(catName === ""){
+            window.alert("이름을 입력해주세요!")
+            return;
+        }
+        await props.instance.methods.registerCat(catName).send();
         var cat = await props.instance.methods.getMyCat().call();
         setCat(cat);
     }
 
-    const fontStyle = {"font-family" : "BMJUA", margin:"0 auto"}
+    const fontStyle = {"fontFamily" : "BMJUA", margin:"0 auto"}
     return(
         <>
             <Card style={{width:"100%", margin:"0 auto", height:"100%"}} elevation={3}>
@@ -71,16 +84,29 @@ export default function Profile(props) {
                     /> : <></>
                 }
                 <CardContent style={{height:"5%"}}>
-                    <Typography style = {{"font-size" : "20px", "font-family" : "BMJUA"}}>
+                    {cat ? 
+                        <div className="task-tooltip">
+                            {script}
+                        </div>
+                        : <></>  
+                    }
+                    <Typography style = {{"font-size" : "20px", "font-family" : "BMJUA", marginTop:"5px"}}>
                         {cat ? `이름: ${cat.name} (${cat.price} ETH)` : "분양을 먼저 받아주세요"}
                     </Typography>
                 </CardContent>
                 <CardActions style={{height:"15%"}}>
-                    {cat ? 
+                    {cat ?
+                        <>
                         <Button variant="contained" onClick={changeCat} style={fontStyle}>물고기 먹이기</Button>
-                        : <Button variant="contained" onClick={registerCat} style={fontStyle}>분양받기</Button>
+                        <Button variant="contained" onClick={getPrevCats} style={fontStyle}>고양이 변천사</Button>
+                        </>
+                        : 
+                        <>
+                        <TextField onChange={v => setCatName(v.target.value)}/>
+                        <Button variant="contained" onClick={registerCat} style={fontStyle}>분양받기</Button>
+                        </>
                     }
-                    <Button variant="contained" onClick={getPrevCats} style={fontStyle}>고양이 변천사</Button>
+
                 </CardActions>
             </Card>
 

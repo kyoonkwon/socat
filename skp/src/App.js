@@ -6,12 +6,13 @@ import getWeb3 from './getWeb3';
 import CatBase from './contracts/CatBase.json';
 import Profile from './components/catProfile';
 import Exchange from './components/exchange';
+import Inventory from './components/inventory/inventory';
 import {Grid, Button, Paper} from '@mui/material'
 import {Box, AppBar, Typography} from '@material-ui/core';
 import {GiBoatFishing, GiFishingPole} from "react-icons/gi";
 import {BsCurrencyExchange} from 'react-icons/bs';
 
-function App() {
+function App(props) {
 
   const [rod,setRod] = useState(0);
   const [mode, setMode] = useState(1);
@@ -22,6 +23,7 @@ function App() {
   const [userSSC, setUserSSC] = useState(0);
   const [userETH, setUserETH] = useState(0);
   const [fishImg, setFishImg] = useState(0);
+  const [script, setScript] = useState("안녕 반갑다냥");
 
   useEffect(() => {
     getContract();
@@ -31,6 +33,21 @@ function App() {
     if(instance !== 0)
       getAccounts();
   }, [instance])
+
+  function clickFishing() {
+    setMode(0);
+    setScript("오늘은 낚시 좀 성공해봐라냥");
+  }
+
+  function clickShop() {
+    setMode(1);
+    setScript("컨트롤이 안좋으면 장비라도 좋은 걸 좀 뽑아봐라냥");
+  }
+
+  function clickExchange() {
+    setMode(2);
+    setScript("SHOW ME THE MONEY");
+  }
 
 
   async function getContract(){
@@ -68,10 +85,8 @@ function App() {
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='static'>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style = {{"font-family" : "BMJUA", "backgroundColor" : "#C9F3F8"}}>
-             {`소소코인 잔고 ${(userSSC / (10 ** 18))}`}
-             <br></br>
-             {`이더리움 잔고 ${userETH / (10 ** 18)}`}
+ <Typography variant="h3" component="div" sx={{ flexGrow: 1 }} style = {{"font-family" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
+             {`소소코인 잔고 ${(userSSC / (10 ** 18))}    이더리움 잔고 ${userETH / (10 ** 18)}`}
           </Typography>
         </AppBar>
       </Box>
@@ -79,11 +94,11 @@ function App() {
 
         <Grid item direction="column" spacing={2} xs={3}>
           <Grid item style={{height:"500px"}}>
-            <Profile web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/>
+            <Profile script={script} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/>
           </Grid>
           <Grid item>
-            <Paper elevation={3} style={{height:"200px", marginTop:"20px"}}>
-              인벤토리
+            <Paper elevation={3} style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"} }>
+              <Inventory style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"}} accounts={accounts} instance={instance}  setSavedFishImage={setSavedFishImage}/>
             </Paper>
           </Grid>
         </Grid>
@@ -97,15 +112,15 @@ function App() {
               <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
               : mode === 1 ?
                 <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
-                : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner}/>
+                : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage}/>
               }
           </Grid>
           </Paper>
 
           <Grid item>
-            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(0);}}> <GiBoatFishing style = {iconStyle}/>  </Button>
-            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(1);}}> <GiFishingPole style = {iconStyle}/> </Button>
-            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(2);}}> <BsCurrencyExchange style = {iconStyle}/> </Button>
+            <Button variant="text" style = {buttonStyle}  onClick={clickFishing}> <GiBoatFishing style = {iconStyle}/>  </Button>
+            <Button variant="text" style = {buttonStyle}  onClick={clickShop}> <GiFishingPole style = {iconStyle}/> </Button>
+            <Button variant="text" style = {buttonStyle}  onClick={clickExchange}> <BsCurrencyExchange style = {iconStyle}/> </Button>
           </Grid>
         </Grid>
         

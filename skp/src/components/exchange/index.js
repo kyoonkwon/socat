@@ -28,13 +28,9 @@ export default function Exchange(props) {
             props.updateBalance();
             
         } else {
-
-
-
         }
-
-
     }
+
 
     return(
         <Grid direction="column" style={{width:"100%", height:"100%"}} justifyContent="flex-start">
@@ -123,8 +119,7 @@ export default function Exchange(props) {
                     : 
                     <Grid container direction="row" style={{height:"300px"}}>
                         <Grid item xs={5} style={{height:"200px"}}>
-                            <Paper elevation={5} style={{margin:"0 auto", width:"100%", height:"100%", maxHeight:"200px", maxWidth:"200px"}}>
-                            </Paper>
+                            <img src = {`img/fish${props.savedFishImage}.png`} alt = "No Image!"elevation={5} style={{margin:"0 auto", width:"100%", height:"100%", maxHeight:"200px", maxWidth:"200px"}}/>
                         </Grid>
                         <Grid item xs={2} style={{display:"flex", verticalAlign:"center"}}>
                             <Typography variant="h5" style={{margin:"auto", fontFamily : "BMJUA"}}>{" >>>"}</Typography>
@@ -141,7 +136,7 @@ export default function Exchange(props) {
                         
                         </Grid>
                         <Grid item xs={5}>
-                            <Typography>{coinValue} SSC</Typography>
+                            <Typography>{props.savedFishImage} SSC</Typography>
                         </Grid>
                     </Grid>
                     } 
