@@ -7,7 +7,6 @@ import CatBase from './contracts/CatBase.json';
 import Profile from './components/catProfile';
 import {Box, AppBar, Typography} from '@material-ui/core';
 
-
 function App() {
 
   const [rod,setRod] = useState(0);
@@ -18,6 +17,7 @@ function App() {
   const [owner, setOwner] = useState(0);
   const [userSSC, setUserSSC] = useState(0);
   const [userETH, setUserETH] = useState(0);
+  const [fishImg, setFishImg] = useState(0)
 
   useEffect(() => {
     getContract();
@@ -71,7 +71,7 @@ function App() {
         </AppBar>
       </Box>
       {mode === 0 ?
-        <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} /> :
+        <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/> :
         (mode === 1 ? 
           <Profile web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/> :
           <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
