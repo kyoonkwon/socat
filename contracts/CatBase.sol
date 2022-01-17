@@ -126,5 +126,32 @@ contract CatBase is MyToken{
 
     emit BUY_ROD(msg.sender, cost);
   }
+  //Fish Contract 
+  event NewFish(uint32 fish);
+  event DeleteFish(uint32 fish);
+  
+  mapping (address => uint32[]) fishList;
 
+  function getFish() public view returns(uint32[] memory fish) {
+    fish = fishList[msg.sender];
+  }
+  // function getFish() public view returns(bool) {
+  //   return fishList[msg.sender].length == 1;
+  // }
+
+  function newFish() public returns(uint32) {
+    if (fishList[msg.sender].length == 0) {
+      fishList[msg.sender] = [0,0,0,0,0,0];
+    }
+    uint16 tmpFish = _makeRandom();
+    fishList[msg.sender][tmpFish] = fishList[msg.sender][tmpFish]+1;
+    emit NewFish(tmpFish);
+    return tmpFish;
+  }
+
+  function deleteFish(uint32 index) public returns(bool success) {
+    fishList[msg.sender][index] = fishList[msg.sender][index] - 1;
+    emit DeleteFish(index);
+    return true;
+  }
 }

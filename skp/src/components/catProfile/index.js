@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button"
-import {GiBoatFishing} from "react-icons/gi";
-import {GiFishingPole} from "react-icons/gi";
+
 import {Card, CardMedia, CardContent, CardActions} from "@material-ui/core"
 import {Typography} from "@material-ui/core"
 import {Modal, Box, Paper} from "@material-ui/core"
@@ -54,33 +53,33 @@ export default function Profile(props) {
     }
 
     async function registerCat(){
-        await props.instance.methods.registerCat().send();
+        await props.instance.methods.registerCat("이우진").send();
         var cat = await props.instance.methods.getMyCat().call();
         setCat(cat);
     }
-    const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10, "backgroundColor": "#21b6ae"};
-    const iconStyle = {"width" : 110 ,"height" : 60}
+
     const fontStyle = {"font-family" : "BMJUA", margin:"0 auto"}
     return(
-        <div>
-            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(0);}}> <GiBoatFishing style = {iconStyle}/>  </Button>
-            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(2);}}> <GiFishingPole style = {iconStyle}/> </Button>
-            <Card style={{width:"400px", margin:"0 auto"}}>
+        <>
+            <Card style={{width:"100%", margin:"0 auto", height:"100%"}} elevation={3}>
                 {cat ?
                 <CardMedia
                     component="img"
-                    image={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${cat.kittyId}.svg`}
+                    image={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${cat.kittyId}`}
                     alt="mycat"
+                    style={{height:"70%"}}
                     /> : <></>
                 }
-                <CardContent>
-                    <Typography style = {{"font-size" : 30, "font-family" : "BMJUA"}}>
-                        {cat ? `이름: ${cat.name} (${cat.price} SSC)` : "분양을 먼저 받아주세요"}
+                <CardContent style={{height:"5%"}}>
+                    <Typography style = {{"font-size" : "20px", "font-family" : "BMJUA"}}>
+                        {cat ? `이름: ${cat.name} (${cat.price} ETH)` : "분양을 먼저 받아주세요"}
                     </Typography>
                 </CardContent>
-                <CardActions>
-                    <Button variant="contained" onClick={registerCat} style={fontStyle}>분양받기</Button>
-                    <Button variant="contained" onClick={changeCat} style={fontStyle}>물고기 먹이기</Button>
+                <CardActions style={{height:"15%"}}>
+                    {cat ? 
+                        <Button variant="contained" onClick={changeCat} style={fontStyle}>물고기 먹이기</Button>
+                        : <Button variant="contained" onClick={registerCat} style={fontStyle}>분양받기</Button>
+                    }
                     <Button variant="contained" onClick={getPrevCats} style={fontStyle}>고양이 변천사</Button>
                 </CardActions>
             </Card>
@@ -96,12 +95,12 @@ export default function Profile(props) {
                     {prevCats.map((elem, idx) => {
                     return(
                     <Paper key={idx} style={{width:"150px"}}>
-                        <img src={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${elem}.svg`} />
+                        <img src={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${elem}`} />
                     </Paper>)
                 })}
                 </Box>
             </Modal>
-        </div>
+        </>
     )
 }
 
