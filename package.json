@@ -1,10 +1,5 @@
 {
   "dependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
-    "@material-ui/icons": "^4.11.2",
-    "@mui/icons-material": "^5.2.5",
-    "openzeppelin-solidity": "^4.4.2",
-    "react-icons": "^4.3.1"
+    "openzeppelin-solidity": "^4.4.2"
   }
 }
