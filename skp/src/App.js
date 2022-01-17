@@ -5,6 +5,8 @@ import FishingRod from './components/fishingshop/FishingRod';
 import getWeb3 from './getWeb3';
 import CatBase from './contracts/CatBase.json';
 import Profile from './components/catProfile';
+import Exchange from './components/exchange';
+import {Grid, Button, Paper} from '@mui/material'
 import {Box, AppBar, Typography} from '@material-ui/core';
 import fishImg1 from '.comp/image/fish1.png'
 import fishImg2 from './image/fish2.png'
@@ -73,12 +75,41 @@ function App() {
           </Typography>
         </AppBar>
       </Box>
-      {mode === 0 ?
-        <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setImg={setFishImg}/> :
-        (mode === 1 ? 
-          <Profile web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/> :
-          <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
-      )}
+      <Grid container style={{margin:"0 auto"}} direction="row" justifyContent="center" spacing={3}>
+
+        <Grid item direction="column" spacing={2} xs={3}>
+          <Grid item style={{height:"500px"}}>
+            <Profile web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/>
+          </Grid>
+          <Grid item>
+            <Paper elevation={3} style={{height:"200px", marginTop:"20px"}}>
+              인벤토리
+            </Paper>
+          </Grid>
+        </Grid>
+
+
+        <Grid item xs={6} direction="column" justifyContent="flex-start" spacing={3}>
+          <Paper style={{height:"630px", display:"flex", alignItems:"center"}}>
+          <Grid container style={{margin:"0 auto"}} direction="row">
+            {
+              mode === 0 ?
+              <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
+              : mode === 1 ?
+                <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
+                : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner}/>
+              }
+          </Grid>
+          </Paper>
+
+          <Grid item>
+            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(0);}}> <GiBoatFishing style = {iconStyle}/>  </Button>
+            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(1);}}> <GiFishingPole style = {iconStyle}/> </Button>
+            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(2);}}> <BsCurrencyExchange style = {iconStyle}/> </Button>
+          </Grid>
+        </Grid>
+        
+      </Grid>
     </div>
   );
 }
