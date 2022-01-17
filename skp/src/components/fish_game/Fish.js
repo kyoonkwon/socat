@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 
         const interval = useRef();
 
-        const speed = 10;
+        const speed = 50;
         const initFishTop = 0;
         const initFishLeft = 50;
         const [dir, setDir]= useState(0); 
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         useEffect(() => {
             interval.current = setInterval(() => {
                 moveFish()
-            })
+            }, 30)
 
             return () => {
                 clearInterval(interval.current)
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
         }
 
         const randomTime = () => {
-            var i = Math.random() * 400
+            var i = Math.random() * 40000
             setTime(i)
             //console.log("Time: "+ i)
         }
@@ -66,38 +66,53 @@ const useStyles = makeStyles(theme => ({
         const moveFish = () => {
             randomDir(); // 방향설정
             randomTime(); // 시간설정
+            //top -5 -> 425
+            //left -5 -> 420
             
-            // ++ 화면 안에서만 움직이는 조건 추가 필요
-            //if(fishLeft <= 270 && fishLeft >= -155 && fishTop >= -255 && fishTop <= -5){
-                // 오른쪽
-                if(dir === 0) {
-                    for(let i=0; i<(time/speed); ++i) {
-                        setFishLeft(fishLeft + speed)
-                        console.log("Left!!: " + fishLeft)
+            //오른쪽
+            if(dir === 0) {
+                for(let i=0; i<(time/speed); ++i) {
+                    if(fishLeft > 420) {
+                        setFishLeft(400)
+                        break;
                     }
+                    setFishLeft(fishLeft + speed)
+                    //console.log("Left!!: " + fishLeft)
                 }
-                // 완쪽 
-                else if (dir === 1) {
-                    for(let i=0; i<(time/speed); ++i) {
-                        setFishLeft(fishLeft - speed)
-                        console.log("Right!!: " + fishLeft)
+            }
+            // 왼쪽 
+            else if (dir === 1) {
+                for(let i=0; i<(time/speed); ++i) {
+                    if(fishLeft < -5) {
+                        setFishLeft(0)
+                        break;
                     }
+                    setFishLeft(fishLeft - speed)
+                    //console.log("Right!!: " + fishLeft)
                 }
-                // 위
-                else if (dir === 2) {
-                    for(let i=0; i<(time/speed); ++i) {
-                        setFishTop(fishTop + speed)
-                        console.log("Top!!: " + fishTop)
+            }
+            // 위
+            else if (dir === 2) {
+                for(let i=0; i<(time/speed); ++i) {
+                    if(fishTop > 425) {
+                        setFishTop(400)
+                        break;
                     }
+                    setFishTop(fishTop + speed)
+                    //console.log("Top!!: " + fishTop)
                 }
-                // 아래
-                else if (dir === 3 && fishTop <= -5){
-                    for(let i=0; i<(time/speed); ++i) {   
-                        setFishTop(fishTop - speed)
-                        console.log("Down!!: " + fishTop)
+            }
+            // 아래
+            else if (dir === 3){
+                for(let i=0; i<(time/speed); ++i) {  
+                    if(fishTop < -5) {
+                        setFishTop(0)
+                        break;
                     }
+                    setFishTop(fishTop - speed)
+                    //console.log("Down!!: " + fishTop)
                 }
-            //}
+            }
         }
         
         return (

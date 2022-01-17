@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     const updateTime = 20;
     const initLeft = 50;
     const initTop = -20;
-    const speed = 10;
+    const speed = 20;
     const moveSize = 200;
     const [left, setLeft] = useState(initLeft);
     const [top, setTop] = useState(initTop);
@@ -92,15 +92,15 @@ const useStyles = makeStyles(theme => ({
     }
 
     const moveUp = () => {
-        setTop(top-5);
+        setTop(top-speed);
     }
 
     const moveDown = () => {
-        setTop(top+5);
+        setTop(top+speed);
     }
 
     const moveRight = () => {
-      setLeft(left+5);
+      setLeft(left+speed);
         /*
         console.log("Right")
         
@@ -125,7 +125,7 @@ const useStyles = makeStyles(theme => ({
     }
 
     const moveLeft = () => {
-      setLeft(left-5);
+      setLeft(left-speed);
         /*
         console.log("Left")
         for(let i=0; i<2*moveSize/speed + 1; i++){
@@ -149,7 +149,7 @@ const useStyles = makeStyles(theme => ({
     // 렌더링
     return (
       <div>
-        <img id="Fishing" src = {RodImg} className={classes.character} style={{marginLeft: `${left}`+'px', marginTop: `${top}`+'px'}} />
+        <img id="fishing" src = {RodImg} className={classes.character} style={{marginLeft: `${left}`+'px', marginTop: `${top}`+'px'}} />
       </div>
     )
 }

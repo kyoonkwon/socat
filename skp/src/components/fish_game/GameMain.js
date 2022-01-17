@@ -28,37 +28,52 @@ function GameMain() {
     const [isStart, setIsStart] = useState(false);
     const [result, setResult] = useState(0);
     const [isMove, setIsMove] = useState(false);
+    const [minDis, setMinDis] = useState(87000);
+    const [maxDis, setMaxDis] = useState(94000);
 
     useEffect(() => {
         if(isStart) {
+            document.addEventListener('keydown', handleKeySpace)
             interval.current = setInterval(() => {
                 setIsMove(true)
             })
         }
         return () => {
             clearInterval(interval.current)
+            document.removeEventListener('keydown', handleKeySpace)
         }
     });
 
     const classes = useStyles();
 
+    // space 누를때 conflict 체크하기
+    const handleKeySpace = (e) => {
+        if (e.keyCode === 32) {
+            checkConflict()
+        }
+    }
+
     // game start
     const handleClickStartButton = () => {
         setIsStart(true)
     }
+
     // fish, fishing rod conflict
     const checkConflict = () => {
+
         let fish = document.querySelector('img#fish');
         let fishing = document.querySelector('img#fishing');
-
+        console.log("fish: "+fish)
+        console.log("fishing: "+fishing)
         if( fish !== null && fishing !== null) {
             let dis = Math.pow(fish.x - fishing.x, 2) + Math.pow(fish.y - fishing.y, 2)
-            if(dis < 3000){
+            console.log("dis: "+dis)
+            if(dis >= minDis && dis <= maxDis){
                 alert("낚시 성공!!")
                 //setResult 으로 낚은 물고기 보여주기
                 setIsStart(false)             
             }
-        }
+        }        
     }
 
     return (
