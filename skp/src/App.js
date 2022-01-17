@@ -5,7 +5,6 @@ import FishingRod from './components/fishingshop/FishingRod';
 import getWeb3 from './getWeb3';
 import CatBase from './contracts/CatBase.json';
 import Profile from './components/catProfile';
-import Fishing from './components/fishgame';
 import {Box, AppBar, Typography} from '@material-ui/core';
 
 
