@@ -53,25 +53,25 @@ export default function Profile(props) {
     }
 
     async function registerCat(){
-        await props.instance.methods.registerCat().send();
+        await props.instance.methods.registerCat("제호").send();
         var cat = await props.instance.methods.getMyCat().call();
         setCat(cat);
     }
 
-    const fontStyle = {"font-family" : "BMJUA", margin:"0 auto"}
+    const fontStyle = {"fontFamily" : "BMJUA", margin:"0 auto"}
     return(
         <>
             <Card style={{width:"100%", margin:"0 auto", height:"100%"}} elevation={3}>
                 {cat ?
                 <CardMedia
                     component="img"
-                    image={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${cat.kittyId}.svg`}
+                    image={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${cat.kittyId}`}
                     alt="mycat"
                     style={{height:"70%"}}
                     /> : <></>
                 }
                 <CardContent style={{height:"5%"}}>
-                    <Typography style = {{"font-size" : "20px", "font-family" : "BMJUA"}}>
+                    <Typography style = {{"fontSize" : "20px", "fontFamily" : "BMJUA"}}>
                         {cat ? `이름: ${cat.name} (${cat.price} ETH)` : "분양을 먼저 받아주세요"}
                     </Typography>
                 </CardContent>

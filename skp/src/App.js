@@ -6,12 +6,12 @@ import getWeb3 from './getWeb3';
 import CatBase from './contracts/CatBase.json';
 import Profile from './components/catProfile';
 import Exchange from './components/exchange';
-
+import Inventory from './components/inventory/inventory';
 import {Grid, Button, Paper} from '@mui/material'
 import {Box, AppBar, Typography} from '@material-ui/core';
 import {GiBoatFishing, GiFishingPole} from "react-icons/gi";
 
-function App() {
+function App(props) {
 
   const [rod,setRod] = useState(0);
   const [mode, setMode] = useState(2);
@@ -65,12 +65,11 @@ function App() {
 
   const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10, "backgroundColor": "#21b6ae"};
   const iconStyle = {"width" : 110 ,"height" : 60}
-
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='static'>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style = {{"font-family" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style = {{"fontFamily" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
              {`소소코인 잔고 ${(userSSC / (10 ** 18))}`}
              <br></br>
              {`이더리움 잔고 ${userETH / (10 ** 18)}`}
@@ -84,8 +83,8 @@ function App() {
             <Profile web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/>
           </Grid>
           <Grid item>
-            <Paper elevation={3} style={{height:"200px", marginTop:"20px"}}>
-              인벤토리
+            <Paper elevation={3} style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"} }>
+              <Inventory rod = {rod} accounts={accounts} instance={instance}/>
             </Paper>
           </Grid>
         </Grid>

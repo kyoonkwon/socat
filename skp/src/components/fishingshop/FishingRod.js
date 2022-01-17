@@ -39,7 +39,7 @@ function FlipCard(props){
     e.preventDefault();
     setIsFlipped(!isFlipped);
   }
-  const buttonStyle = {"width" : "80%", "font-family" : "BMJUA", "font-size" : 20};
+  const buttonStyle = {"width" : "80%", "fontFamily" : "BMJUA", "fontSize" : 20};
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <div className="front">
