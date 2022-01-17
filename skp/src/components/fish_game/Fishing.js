@@ -9,11 +9,11 @@ const useStyles = makeStyles(theme => ({
   
     },
     character: {
-      position: 'fixed',
-      width:'60px',
-      height:'450px',
-      zIndex: '-1',
-      left: '45%',
+      position:'absolute',
+      width:'4%',
+      maxWidth: '150px',
+      height:'60%',
+      maxHeight: '800px',
     },
   }))
 
@@ -52,10 +52,10 @@ const useStyles = makeStyles(theme => ({
     // up arrow
     const handleKeyUp = (e) => {
         if (e.keyCode === 38) {
-          if(!isMove && top >= -300) {
+          if(!isMove && top >= -370) {
             isMove = !isMove;
             moveUp();
-            console.log("Top: " + top)
+            //console.log("Top: " + top)
           }
         }
     }
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
           if(!isMove && top <= -5) {
             isMove = !isMove;
             moveDown();
-            console.log("Down: " + top)
+           // console.log("Down: " + top)
           }
         }
     } 
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
     // left arrow
     const handleKeyLeft = (e) => {
         if (e.keyCode === 37) {
-          if(!isMove && left >= -155) {
+          if(!isMove && left >= -390) {
             isMove = !isMove;
             moveLeft();
             //console.log("Left: " + left)
@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
     //right arrow
     const handleKeyRight = (e) => {
         if (e.keyCode === 39) {
-          if(!isMove && left <= 270) {
+          if(!isMove && left <= 340) {
             isMove = !isMove;
             moveRight();
             //console.log("Right: " + left)

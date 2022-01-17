@@ -10,10 +10,8 @@ const useStyles = makeStyles(theme => ({
     } ,
     character: {
         position: 'absolute',       
-        width: '80px',
-        height: '80px',
-        //top: '10%',
-        left: '35%',
+        width: '6%',
+        height: '10%',
     },
     }))
 
@@ -24,7 +22,7 @@ const useStyles = makeStyles(theme => ({
         const interval = useRef();
         const {setFishImg} = props;
 
-        const speed = 20;
+        const speed = 40;
         const initFishTop = 30;
         const initFishLeft = 50;
         const [dir, setDir]= useState(0); 
@@ -37,7 +35,7 @@ const useStyles = makeStyles(theme => ({
         useEffect(() => {
             interval.current = setInterval(() => {
                 moveFish()
-            }, 10)
+            }, 100)
 
             return () => {
                 clearInterval(interval.current)
@@ -77,8 +75,8 @@ const useStyles = makeStyles(theme => ({
             //오른쪽
             if(dir === 0) {
                 for(let i=0; i<(time/speed); ++i) {
-                    if(fishLeft > 420) {
-                        setFishLeft(400)
+                    if(fishLeft > 250) {
+                        setFishLeft(240)
                         break;
                     }
                     setFishLeft(fishLeft + speed)
@@ -88,8 +86,8 @@ const useStyles = makeStyles(theme => ({
             // 왼쪽 
             else if (dir === 1) {
                 for(let i=0; i<(time/speed); ++i) {
-                    if(fishLeft < 0) {
-                        setFishLeft(5)
+                    if(fishLeft < -400) {
+                        setFishLeft(-390)
                         break;
                     }
                     setFishLeft(fishLeft - speed)
@@ -99,8 +97,8 @@ const useStyles = makeStyles(theme => ({
             // 위
             else if (dir === 2) {
                 for(let i=0; i<(time/speed); ++i) {
-                    if(fishTop > 400) {
-                        setFishTop(390)
+                    if(fishTop > 500) {
+                        setFishTop(490)
                         break;
                     }
                     setFishTop(fishTop + speed)
@@ -122,11 +120,11 @@ const useStyles = makeStyles(theme => ({
 
         return (
             <div>
-                <img id="fish" src= {props.fishImg} className={classes.character}
+                <img id={"fish"+props.fishId} src= {props.fishImg} className={classes.character}
                 style={{marginLeft: `${fishLeft}`+'px', marginTop: `${fishTop}`+'px' }}/>
-                {/* <img id="fish2" src= {fishImg2} className={classes.character}
+                {/* <img id="fish2" src= {props.fishImg} className={classes.character}
                 style={{marginLeft: `${fishLeft}`+'px', marginTop: `${fishTop}`+'px' }}/>
-                <img id="fish3" src= {fishImg} className={classes.character}
+                <img id="fish3" src= {props.fishImg} className={classes.character}
                 style={{marginLeft: `${fishLeft}`+'px', marginTop: `${fishTop}`+'px' }}/> */}
             </div>
         )
