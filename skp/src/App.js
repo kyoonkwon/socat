@@ -8,9 +8,8 @@ import Profile from './components/catProfile';
 import Exchange from './components/exchange';
 import {Grid, Button, Paper} from '@mui/material'
 import {Box, AppBar, Typography} from '@material-ui/core';
-import fishImg1 from '.comp/image/fish1.png'
-import fishImg2 from './image/fish2.png'
-import fishImg3 from './image/fish3.png'
+import {GiBoatFishing, GiFishingPole} from "react-icons/gi";
+import {BsCurrencyExchange} from 'react-icons/bs';
 
 function App() {
 
@@ -22,7 +21,7 @@ function App() {
   const [owner, setOwner] = useState(0);
   const [userSSC, setUserSSC] = useState(0);
   const [userETH, setUserETH] = useState(0);
-  const [fishImg, setFishImg] = useState(fishImg1)
+  const [fishImg, setFishImg] = useState(0);
 
   useEffect(() => {
     getContract();
@@ -63,7 +62,8 @@ function App() {
     setUserSSC(SSC);
     setUserETH(ETH);
   }
-
+  const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10, "backgroundColor": "#21b6ae"};
+  const iconStyle = {"width" : 110 ,"height" : 60, "backgroundColor": "white"}
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
@@ -91,7 +91,7 @@ function App() {
 
         <Grid item xs={6} direction="column" justifyContent="flex-start" spacing={3}>
           <Paper style={{height:"630px", display:"flex", alignItems:"center"}}>
-          <Grid container style={{margin:"0 auto"}} direction="row">
+          <Grid container style={{margin:"0 auto", height:"100%"}} direction="row">
             {
               mode === 0 ?
               <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
