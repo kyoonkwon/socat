@@ -53,7 +53,7 @@ export default function Profile(props) {
     }
 
     async function registerCat(){
-        await props.instance.methods.registerCat().send();
+        await props.instance.methods.registerCat("이우진").send();
         var cat = await props.instance.methods.getMyCat().call();
         setCat(cat);
     }
@@ -65,7 +65,7 @@ export default function Profile(props) {
                 {cat ?
                 <CardMedia
                     component="img"
-                    image={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${cat.kittyId}.svg`}
+                    image={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${cat.kittyId}`}
                     alt="mycat"
                     style={{height:"70%"}}
                     /> : <></>
@@ -95,7 +95,7 @@ export default function Profile(props) {
                     {prevCats.map((elem, idx) => {
                     return(
                     <Paper key={idx} style={{width:"150px"}}>
-                        <img src={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${elem}.svg`} />
+                        <img src={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${elem}`} />
                     </Paper>)
                 })}
                 </Box>

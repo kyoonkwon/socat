@@ -10,6 +10,7 @@ import Exchange from './components/exchange';
 import {Grid, Button, Paper} from '@mui/material'
 import {Box, AppBar, Typography} from '@material-ui/core';
 import {GiBoatFishing, GiFishingPole} from "react-icons/gi";
+import {BsCurrencyExchange} from 'react-icons/bs';
 
 function App() {
 
@@ -64,7 +65,7 @@ function App() {
   }
 
   const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10, "backgroundColor": "#21b6ae"};
-  const iconStyle = {"width" : 110 ,"height" : 60}
+  const iconStyle = {"width" : 110 ,"height" : 60, "backgroundColor": "white"}
 
   return (
     <div className="App">
@@ -99,7 +100,7 @@ function App() {
               <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} />
               : mode === 1 ?
                 <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
-                : <Exchange />
+                : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner}/>
               }
           </Grid>
           </Paper>
@@ -107,6 +108,7 @@ function App() {
           <Grid item>
             <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(0);}}> <GiBoatFishing style = {iconStyle}/>  </Button>
             <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(1);}}> <GiFishingPole style = {iconStyle}/> </Button>
+            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(2);}}> <BsCurrencyExchange style = {iconStyle}/> </Button>
           </Grid>
         </Grid>
         
