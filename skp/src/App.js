@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import GameMain from './components/fish_game/GameMain';
 import FishingRod from './components/fishingshop/FishingRod';
 import getWeb3 from './getWeb3';
 import CatBase from './contracts/CatBase.json';
@@ -71,7 +72,7 @@ function App() {
         </AppBar>
       </Box>
       {mode === 0 ?
-        <Fishing web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} /> :
+        <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} /> :
         (mode === 1 ? 
           <Profile web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/> :
           <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 

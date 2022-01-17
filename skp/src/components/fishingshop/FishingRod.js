@@ -26,10 +26,6 @@ function FlipCard(props){
     await props.instance.methods.newRod(props.index, props.price+ "000000000000000000").send();
     const check = await props.instance.methods.getRod().call();
     console.log(acc);
-    // var check2 = await props.instance.methods.ethToSSC().send({value : "1000000000000000000" });
-    // var check2 = await props.instance.methods.SSCtoEth("1000000000000000000").send();
-    // var check2 = await props.instance.methods.useSSC(10000).send();
-    // console.log(check2);
     acc = await props.instance.methods.balanceOf(props.accounts[0]).call();
     props.setUserSSC(acc);
     console.log(acc);
@@ -72,9 +68,9 @@ function FishingRod(props) {
     <div>
       <Button variant="text" style= {buttonStyle} onClick={() => {setMode(1);}}><AiFillHome style = {iconStyle}/></Button>
       <div style={FishingRodStyle}>
-          <FlipCard setUserSSC = {props.setUserSSC} name = "대 박" price = "5" url = "img/kb.png" rodUrl = {`img/rod${rand1}.webp`} setMode = {setMode} instance = {props.instance} index = "1" setRod = {props.setRod} rand = {rand1} accounts = {props.accounts}></FlipCard>
+          <FlipCard setUserSSC = {props.setUserSSC} name = "쪽 박" price = "5" url = "img/kb.png" rodUrl = {`img/rod${rand1}.webp`} setMode = {setMode} instance = {props.instance} index = "1" setRod = {props.setRod} rand = {rand1} accounts = {props.accounts}></FlipCard>
           <FlipCard setUserSSC = {props.setUserSSC} name = "중 박" price = "10" url = "img/lotte.jpg" rodUrl = {`img/rod${rand2}.webp`} setMode = {setMode} instance = {props.instance} index = "2" setRod = {props.setRod} rand = {rand2} accounts = {props.accounts}></FlipCard>
-          <FlipCard setUserSSC = {props.setUserSSC} name = "쪽 박" price = "15" url = "img/shinhan.png" rodUrl = {`img/rod${rand3}.webp`} setMode = {setMode} instance = {props.instance} index = "3" setRod = {props.setRod} rand = {rand3} accounts = {props.accounts}></FlipCard>
+          <FlipCard setUserSSC = {props.setUserSSC} name = "대 박" price = "15" url = "img/shinhan.png" rodUrl = {`img/rod${rand3}.webp`} setMode = {setMode} instance = {props.instance} index = "3" setRod = {props.setRod} rand = {rand3} accounts = {props.accounts}></FlipCard>
       </div>
     </div>
   );
