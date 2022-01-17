@@ -6,7 +6,6 @@ import getWeb3 from './getWeb3';
 import CatBase from './contracts/CatBase.json';
 import Profile from './components/catProfile';
 import Exchange from './components/exchange';
-
 import {Grid, Button, Paper} from '@mui/material'
 import {Box, AppBar, Typography} from '@material-ui/core';
 import {GiBoatFishing, GiFishingPole} from "react-icons/gi";
@@ -22,6 +21,7 @@ function App() {
   const [owner, setOwner] = useState(0);
   const [userSSC, setUserSSC] = useState(0);
   const [userETH, setUserETH] = useState(0);
+  const [fishImg, setFishImg] = useState(0)
 
   useEffect(() => {
     getContract();
@@ -78,6 +78,7 @@ function App() {
           </Typography>
         </AppBar>
       </Box>
+
       <Grid container style={{margin:"0 auto"}} direction="row" justifyContent="center" spacing={3}>
 
         <Grid item direction="column" spacing={2} xs={3}>
@@ -97,7 +98,7 @@ function App() {
           <Grid container style={{margin:"0 auto"}} direction="row">
             {
               mode === 0 ?
-              <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} />
+              <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
               : mode === 1 ?
                 <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
                 : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner}/>

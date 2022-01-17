@@ -4,32 +4,38 @@ import Fish from './Fish';
 import Fishing from './Fishing';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import {AiFillHome} from "react-icons/ai";
+import fishImg1 from './image/fish1.png'
+import fishImg2 from './image/fish2.png'
+import fishImg3 from './image/fish3.png'
 
 const useStyles = makeStyles(() => ({
     root: {
 
     },
-    button: {
-        border: '1px solid black',
-        magin: '50px 0 0 50px',
-        position: 'absolute',
-        width: '1000px',
-        height: '50px',
-        fontWeight: 'bold',
-        fontSize: '50px',
-        textTransform: 'initial'
-    }
+    // button: {
+    //     border: '1px solid black',
+    //     magin: '50px 0 0 50px',
+    //     position: 'absolute',
+    //     width: '1000px',
+    //     height: '50px',
+    //     fontWeight: 'bold',
+    //     fontSize: '50px',
+    //     textTransform: 'initial'
+    // }
 }))
 
-function GameMain() {
+function GameMain(props) {
     //init
     const interval = useRef();
 
-    const [isStart, setIsStart] = useState(false);
+    var {setFishImg} = props;
+
+    const [isStart, setIsStart] = useState(true);
     const [result, setResult] = useState(0);
     const [isMove, setIsMove] = useState(false);
-    const [minDis, setMinDis] = useState(92000);
-    const [maxDis, setMaxDis] = useState(98000);
+    const [minDis, setMinDis] = useState(140000);
+    const [maxDis, setMaxDis] = useState(160000);
 
     useEffect(() => {
         if(isStart) {
@@ -49,6 +55,7 @@ function GameMain() {
     // space 누를때 conflict 체크하기
     const handleKeySpace = (e) => {
         if (e.keyCode === 32) {
+            console.log("click")
             checkConflict()
         }
     }
@@ -78,29 +85,45 @@ function GameMain() {
                 }
                 */
                 //setResult 으로 낚은 물고기 보여주기    
-                setIsStart(false)              
+                setIsStart(true)              
             }
         }        
     }
 
+    const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10,  "backgroundColor": "#21b6ae", "box-shadow" : "5px 5px 5px 5px gray"}; 
+    var {setMode} = props;
+    const iconStyle = {"width" : 110 ,"height" : 60}
+
     return (
         <div>
             {
-                isStart ?
-                <div id="fish_game" text-align="center">
-                    <Fish />
-                    <Fishing />
-                    <img src={SeaImg} width="500" height="500"/>
-                    <div className={classes.timer}>
-                        <div>낚시 게임!</div>
+                //isStart ?
+                    <div id="fish_game">
+                        <div>
+                            {/* <div className={classes.timer}>
+                                <div style={{padding: '10px', fontSize: '40px', font: 'bold'   }}>낚시 게임</div>
+                            </div> */}
+                            <Fish setFishImg= {props.setFishImg} fishImg={fishImg1}/>
+                            <Fish setFishImg= {props.setFishImg} fishImg={fishImg2}/>
+                            <Fish setFishImg= {props.setFishImg} fishImg={fishImg3}/>
+                            <Fishing />
+                            <img src={SeaImg} width="500" height="500" style={
+                            { position: 'fixed',
+                                zIndex:'-2',
+                                left: '35%',
+                            }}/>
+                        </div>
+                        <Button variant="text" style= {buttonStyle, {marginTop: '520px'}} onClick={() => {setMode(1);}}><AiFillHome style = {iconStyle}/></Button>
                     </div>
-                </div>
-                :
-                <div>
-                    <Button onClick={handleClickStartButton} className = {classes.button} >
-                        Click to Start Game!
-                    </Button>    
-                </div>               
+                
+                //:
+                //<div>
+                    
+                //     {/* <Button onClick={handleClickStartButton} className = {classes.button} >
+                //         Click to Start Game!
+                //     </Button>     */}
+                //</div>  
+                             
             }
         </div>
     )
