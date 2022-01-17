@@ -12,8 +12,10 @@ contract CatBase is MyToken{
     uint private randNonce = 0;
     uint private coolDownTime = 1 minutes;
     uint32 private catCounts = 0;
-    string[] private kittyIds = ["0", "150593.svg", "232751.svg", "404726.svg", "462704.svg", "493816.svg"];
-    uint256[] private kittyPrices = [0, 1, 2, 3, 4, 5];
+    string[] private kittyIds = ["0", "150593.svg", "232751.svg", "404726.svg", "462704.svg", "493816.svg", "166471.svg", 
+    "145686.svg", "137853.svg", "117429.svg", "96197.svg", "1994121.png", "1993609.png", "2010551.png", "2004592.png", 
+    "2010501.png"];
+    uint256[] private kittyPrices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
     struct Cat {
         string name;
@@ -65,18 +67,19 @@ contract CatBase is MyToken{
     }
 
 
-    function updateKittyId(uint16 _to) internal returns(string memory beforeId, string memory afterId){
+    function updateKittyId() internal returns(string memory beforeId, string memory afterId){
 
         Cat storage cat = cats[_getMyCatIdx()];
         beforeId = cat.kittyId;
-        cat.kittyId = kittyIds[_to];
+        cat.kittyId = kittyIds[(idToIndex[beforeId])%15 + 1];
         afterId = cat.kittyId;
     }
 
     function feed() public{
         string memory beforeId;
         string memory afterId;
-        (beforeId, afterId) = updateKittyId(_makeRandom());
+
+        (beforeId, afterId) = updateKittyId();
         emit FeedCat(msg.sender, beforeId, afterId);
     }
     //contract 말고 내부에 선언
