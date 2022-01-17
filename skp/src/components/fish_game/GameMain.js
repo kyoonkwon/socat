@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import SeaImg from './image/background.jpg';
 import Fish from './Fish';
 import Fishing from './Fishing';
@@ -28,8 +28,8 @@ function GameMain() {
     const [isStart, setIsStart] = useState(false);
     const [result, setResult] = useState(0);
     const [isMove, setIsMove] = useState(false);
-    const [minDis, setMinDis] = useState(87000);
-    const [maxDis, setMaxDis] = useState(94000);
+    const [minDis, setMinDis] = useState(92000);
+    const [maxDis, setMaxDis] = useState(98000);
 
     useEffect(() => {
         if(isStart) {
@@ -69,9 +69,16 @@ function GameMain() {
             let dis = Math.pow(fish.x - fishing.x, 2) + Math.pow(fish.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert("낚시 성공!!")
-                //setResult 으로 낚은 물고기 보여주기
-                setIsStart(false)             
+                alert("낚시 성공!")
+                /*
+                if(window.confirm("낚시 성공!!\n\n물고기를 저장하시겠습니까?") === true){
+                    // 저장 
+                } else {
+                    // 저장 안함          
+                }
+                */
+                //setResult 으로 낚은 물고기 보여주기    
+                setIsStart(false)              
             }
         }        
     }

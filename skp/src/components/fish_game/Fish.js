@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 
         const interval = useRef();
 
-        const speed = 50;
+        const speed = 20;
         const initFishTop = 0;
         const initFishLeft = 50;
         const [dir, setDir]= useState(0); 
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         useEffect(() => {
             interval.current = setInterval(() => {
                 moveFish()
-            }, 30)
+            }, 1000)
 
             return () => {
                 clearInterval(interval.current)

@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     const updateTime = 20;
     const initLeft = 50;
     const initTop = -20;
-    const speed = 20;
+    const speed = 25;
     const moveSize = 200;
     const [left, setLeft] = useState(initLeft);
     const [top, setTop] = useState(initTop);
