@@ -10,6 +10,7 @@ import Inventory from './components/inventory/inventory';
 import {Grid, Button, Paper} from '@mui/material'
 import {Box, AppBar, Typography} from '@material-ui/core';
 import {GiBoatFishing, GiFishingPole} from "react-icons/gi";
+import {BsCurrencyExchange} from 'react-icons/bs';
 
 function App(props) {
 
@@ -21,6 +22,8 @@ function App(props) {
   const [owner, setOwner] = useState(0);
   const [userSSC, setUserSSC] = useState(0);
   const [userETH, setUserETH] = useState(0);
+  const [fishImg, setFishImg] = useState(0);
+  const [savedFishImage,setSavedFishImage] = useState(0);
 
   useEffect(() => {
     getContract();
@@ -64,7 +67,8 @@ function App(props) {
   }
 
   const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10, "backgroundColor": "#21b6ae"};
-  const iconStyle = {"width" : 110 ,"height" : 60}
+  const iconStyle = {"width" : 110 ,"height" : 60, "backgroundColor": "white"}
+
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
@@ -76,6 +80,7 @@ function App(props) {
           </Typography>
         </AppBar>
       </Box>
+
       <Grid container style={{margin:"0 auto"}} direction="row" justifyContent="center" spacing={3}>
 
         <Grid item direction="column" spacing={2} xs={3}>
@@ -84,7 +89,7 @@ function App(props) {
           </Grid>
           <Grid item>
             <Paper elevation={3} style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"} }>
-              <Inventory rod = {rod} accounts={accounts} instance={instance}/>
+              <Inventory style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"}} accounts={accounts} instance={instance}  setSavedFishImage={setSavedFishImage}/>
             </Paper>
           </Grid>
         </Grid>
@@ -95,10 +100,10 @@ function App(props) {
           <Grid container style={{margin:"0 auto"}} direction="row">
             {
               mode === 0 ?
-              <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} />
+              <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
               : mode === 1 ?
                 <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
-                : <Exchange />
+                : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage}/>
               }
           </Grid>
           </Paper>
@@ -106,6 +111,7 @@ function App(props) {
           <Grid item>
             <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(0);}}> <GiBoatFishing style = {iconStyle}/>  </Button>
             <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(1);}}> <GiFishingPole style = {iconStyle}/> </Button>
+            <Button variant="text" style = {buttonStyle}  onClick={() => {setMode(2);}}> <BsCurrencyExchange style = {iconStyle}/> </Button>
           </Grid>
         </Grid>
         
