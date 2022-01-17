@@ -19,20 +19,27 @@ contract("CatBase", function([deployer, user1]){
         
     })
 
-    it("check soso coin", async () => {
-        console.log("==== checking balance ===");
+    // it("check soso coin", async () => {
+    //     console.log("==== checking balance ===");
         
-        await cat.ethToSSC({from:user1, value:coin});
+    //     await cat.ethToSSC({from:user1, value:coin});
 
+    //     var x1 = await cat.balanceOf(deployer);
+    //     var y1 = await cat.balanceOf(user1);
+    //     var x2 = await cat.SSCtoEth({from:user1, value:coin});
+    //     var x3 = await cat.balanceOf(deployer);
+    //     var y3 = await cat.balanceOf(user1);
 
-        var x1 = await cat.balanceOf(deployer);
-        var y1 = await cat.balanceOf(user1);
-        var x2 = await cat.SSCtoEth({from:user1, value:coin});
-        var x3 = await cat.balanceOf(deployer);
-        var y3 = await cat.balanceOf(user1);
+    //     console.log("owner ssc", x1, x3);
+    //     console.log("user1 ssc", y1, y3);
+    // })
 
-        console.log("owner ssc", x1, x3);
-        console.log("user1 ssc", y1, y3);
+    it("new fish test", async () => {
+        console.log("new!");
+        await cat.newFish({from:user1});
+        var x = await cat.getFish({from:user1});
+        console.log(x[0]);
+
 
     })
 

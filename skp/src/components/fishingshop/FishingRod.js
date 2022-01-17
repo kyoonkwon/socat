@@ -8,21 +8,21 @@ function FlipCard(props){
   let rod = 0;
   const [isFlipped, setIsFlipped] = useState(false);
 
-   async function createRod() {
-    console.log(props);
-    const check = await props.instance.methods.createRod().send();
-    console.log(check);
-  }
-  
-  async function getRod() {
-    const check = await props.instance.methods.getRod().call();
-    console.log(check);
-    setIsFlipped(!isFlipped);
-  }
-
-  async function newRod() {
+  // async function newFish() {
+  //   let zz = await props.instance.methods.newFish().send();
+  //   let test = await props.instance.methods.getFish().call();
+  //   console.log(test);
+  //   setIsFlipped(!isFlipped);
+  //   // 이런식으로 인자 연결 하세용 x => deleteFish(x)
+  // }
+  // async function deleteFish(index) {
+  //   await props.instance.methods.deleteFish(index).send();
+  //   let test = await props.instance.methods.getFish().call();
+  //   console.log(test);
+  //   setIsFlipped(!isFlipped);
+  // }
+  async function newRod() { 
     var acc = await props.instance.methods.balanceOf(props.accounts[0]).call();
-
     await props.instance.methods.newRod(props.index, props.price+ "000000000000000000").send();
     const check = await props.instance.methods.getRod().call();
     console.log(acc);

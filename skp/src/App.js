@@ -33,20 +33,20 @@ function App() {
   async function getContract(){
 
     var web3, accounts, instance, owner;
-
     web3 = await getWeb3();
     accounts = await web3.eth.getAccounts();
-
+    
     var networkId = await web3.eth.net.getId();
     var network =  CatBase.networks[networkId];
+    
     instance = new web3.eth.Contract(
       CatBase.abi,
       network && network.address,
       {from: accounts[0]}
     );
-
+    
     owner = await instance.methods.getOwner().call();
-
+    
     setWeb3(web3);
     setAccounts(accounts);
     setInstance(instance);
@@ -56,6 +56,7 @@ function App() {
   async function getAccounts(){
     var SSC = await instance.methods.balanceOf(accounts[0]).call();
     var ETH = await web3.eth.getBalance(accounts[0]);
+    console.log(SSC)
     setUserSSC(SSC);
     setUserETH(ETH);
   }
