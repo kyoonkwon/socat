@@ -24,6 +24,7 @@ function App(props) {
   const [userETH, setUserETH] = useState(0);
   const [fishImg, setFishImg] = useState(0);
   const [script, setScript] = useState("안녕 반갑다냥");
+  const [savedFishImage, setSavedFishImage] = useState([]);
 
   useEffect(() => {
     getContract();

@@ -10,8 +10,8 @@ const useStyles = makeStyles(theme => ({
     } ,
     character: {
         position: 'absolute',       
-        width: '6%',
-        height: '10%',
+        width: '5%',
+        height: '8%',
     },
     }))
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
         useEffect(() => {
             interval.current = setInterval(() => {
                 moveFish()
-            }, 100)
+            }, 10)
 
             return () => {
                 clearInterval(interval.current)
@@ -75,8 +75,8 @@ const useStyles = makeStyles(theme => ({
             //오른쪽
             if(dir === 0) {
                 for(let i=0; i<(time/speed); ++i) {
-                    if(fishLeft > 250) {
-                        setFishLeft(240)
+                    if(fishLeft > 300) {
+                        setFishLeft(290)
                         break;
                     }
                     setFishLeft(fishLeft + speed)
@@ -86,8 +86,8 @@ const useStyles = makeStyles(theme => ({
             // 왼쪽 
             else if (dir === 1) {
                 for(let i=0; i<(time/speed); ++i) {
-                    if(fishLeft < -400) {
-                        setFishLeft(-390)
+                    if(fishLeft < -380) {
+                        setFishLeft(-370)
                         break;
                     }
                     setFishLeft(fishLeft - speed)
