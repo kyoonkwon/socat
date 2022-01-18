@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react';
 import SeaImg from './image/background.jpg';
-import Fish, { checkConflict } from './Fish';
+import Fish from './Fish';
 import Fishing from './Fishing';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Box, Paper, Typography, Button } from '@material-ui/core'
@@ -24,7 +24,7 @@ function GameMain(props) {
 
     const [isStart, setIsStart] = useState(true);
     const [result, setResult] = useState(0);
-    const [isMove, setIsMove] = useState(true);
+    const [isMove, setIsMove] = useState(true); 
     const [minDis, setMinDis] = useState(145000);
     const [maxDis, setMaxDis] = useState(155000);
     const [modalOpen, setOpen] = useState(false);
@@ -33,12 +33,12 @@ function GameMain(props) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    let fish1 = document.querySelector('img#fish1');
-    let fish2 = document.querySelector('img#fish2');
-    let fish3 = document.querySelector('img#fish3');
-    let fish4 = document.querySelector('img#fish4');
-    let fish5 = document.querySelector('img#fish5');
-    let fishing = document.querySelector('img#fishing');
+    const fish1 = document.querySelector('img#fish1');
+    const fish2 = document.querySelector('img#fish2');
+    const fish3 = document.querySelector('img#fish3');
+    const fish4 = document.querySelector('img#fish4');
+    const fish5 = document.querySelector('img#fish5');
+    const fishing = document.querySelector('img#fishing');
 
     useEffect(() => {
         if(isStart) {
@@ -135,9 +135,7 @@ function GameMain(props) {
     return (
             
             <div id="fish_game" style={{width:"100%", height:"100%", backgroundImage:"url(img/background.jpg)"}}>
-                    {/* <div className={classes.timer}>
-                        <div style={{padding: '10px', fontSize: '40px', font: 'bold'   }}>낚시 게임</div>
-                    </div> */}
+                    
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg1} fishId="1"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg2} fishId="2"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg3} fishId="3"/>
@@ -151,12 +149,7 @@ function GameMain(props) {
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                         >
-                        <Box display="flex" style={modalStyle} alignContent='vertical' >
-                            {/* {prevCats.map((elem, idx) => {
-                            return(
-                            <Paper key={idx} style={{width:"150px"}}>
-                                <img src={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${elem}`} />
-                            </Paper>) */}
+                        <Box display="flex" style={modalStyle} alignContent='vertical' textAlign='center' >
                             <Paper>
                                 <Typography variant='h4' component='h2' align="center">
                                     낚시 성공!
@@ -165,7 +158,7 @@ function GameMain(props) {
                                     {"획득 코인: " + `${fishcoin}`}
                                 </Typography>
                                 <img src={modalImg.src} style={{width: '200px', height: '200px'}}/>
-                                <Button onclick={saveFish}>Save</Button>
+                                <Button variant="outlined" onclick={saveFish}>Save</Button>
                             </Paper>
                         </Box>
                     </Modal>
@@ -186,5 +179,5 @@ const modalStyle = {
     boxShadow: 24,
     p: 4,
     justifyContent:"center",
-    margin:"10px auto",
+    margin:"10px 10px",
   };
