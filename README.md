@@ -1,5 +1,7 @@
 # SOCAT
 
+<img src="imgs/main3.png" width=400>
+
 소소코인을 모아 고양이를 키우자.
 블록체인 기반 P2E 웹 게임.
 
@@ -9,6 +11,11 @@
 
 ### 낚시 게임
 
+<img src="imgs/fishing3.png" width=400>
+<img src="imgs/catch3.png" width=400>
+
+
+
 낚시 게임은 개별적으로 움직이는 5마리의 물고기를 상하좌우로 움직이는 낚시대를 이용하여 잡는 react 기반 게임임. 
 
 물고기 움직임의 방향을 매번 랜덤하게 만들기 위해 setInterval 과 Math.random() 을 사용하였음.
@@ -16,6 +23,11 @@
 구매한 낚시대에 따라 물고기가 잡히는 범위를 state로 조정하였음. 
 
 ### 낚싯대 뽑기
+
+<img src="imgs/rod3.png" width=400>
+<img src="imgs/flip3.png" width=400>
+
+
 
 낚싯대에 따라 낚시 게임에서 물고기를 잡는 범위가 늘어남.
 
@@ -25,7 +37,13 @@
 
 ### 거래소
 
+<img src="imgs/exchange3.png" width=400>
+
+
 ETH(이더리움) to SSC(자체 제작 코인) ,SSC to ETH, Fish to SSC 거래를 담당함.
+
+<img src="imgs/sold3.png" width=400>
+
 
 인벤토리의 물고기를 클릭하여 판매 가능함.
 
@@ -35,9 +53,14 @@ ETH(이더리움) to SSC(자체 제작 코인) ,SSC to ETH, Fish to SSC 거래�
 
 고양이 프로필과 잔고, 인벤토리를 포함함.
 
-고양이는 말하기 기능, 물고기를 먹으면 상위 등급의 고양이로 업그레이드, 이전 고양이 기록을 확인할 수 있는 기능이 있음.
+<img src="imgs/feed3.png" width=400>
 
-인벤토리는 낚시로 얻은 물고리를 담고 있음.
+고양이는 말하기 기능, 물고기를 먹으면 상위 등급의 고양이로 업그레이드, 인벤토리는 낚시로 얻은 물고리를 담고 있음.
+
+<img src="imgs/log3.png" width=400>
+
+이전 고양이 기록을 확인할 수 있는 기능이 있음.
+
 
 ## Implementation.
 
@@ -77,4 +100,5 @@ react를 활용하여 web3.js(Ethereum)를 사용함 => contract를 연결하는
 ### Shout out to (Special Thanks to)
 
 [KAIST 전산학부 19학번 윤태양](https://www.github.com/hotsunchip) - Coin Logo Design
+
 [크립토키티](https://www.cryptokitties.co) - Copyright holder
