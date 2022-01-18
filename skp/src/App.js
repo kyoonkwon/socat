@@ -124,15 +124,14 @@ function App(props) {
                       <Grid style={{height:"100px"}}>
                           <Typography variant='h3' style = {{"fontFamily" : "BMJUA", paddingTop:"10px"}}>블록체인이란</Typography>
                       </Grid>
-                      <Grid style={{height:"500px"}}>
-                          <p>
-                            
-                            - 중앙 서버가 아닌 네트워크에 참가하는 모든 공동체가 거래를 기록하고 관리
-                            - 각 거래는 블록의 형태로 저장되며 이 거래가 체인처럼 연결되어 블록체인이라고 부름
-                            -  거래를 통하여 블록이 생성되면 이를 검증하는 과정이 필요함. 
-                            - 거래 발생을 인지한 노드들이 해시값을 찾아서 기존의 블록체인과 연결을 하게 되고, 가장 먼저 해시값을 찾은 노드에게 보상이 주어짐(채굴)
-                            - 비트코인은 탈중앙화된
-                          </p>
+                      <Grid style={{height:"500px", textAlign:"left", padding:"10px", backgroundImage:"url(/img/ssc.png)", backgroundRepeat:"no-repeat", backgroundPosition:"center center"}}>
+                          <Typography variant='h5' style = {{"fontFamily" : "BMJUA", marginTop:"20px"}}> - 중앙 서버가 아닌 네트워크에 참가하는 노드(참여자)가 거래를 기록하고 관리</Typography>
+                          <Typography variant='h5' style = {{"fontFamily" : "BMJUA", marginTop:"20px"}}> - 각 거래는 블록의 형태로 저장되며, 이 거래가 체인처럼 연결되어 블록체인이라고 부름 </Typography>
+                          <Typography variant='h5' style = {{"fontFamily" : "BMJUA", marginTop:"20px"}}> - 거래를 통하여 블록이 생성되면 부정한 거래를 방지하기 위해 검증하는 과정이 필요함 </Typography>
+                          <Typography variant='h5' style = {{"fontFamily" : "BMJUA", marginTop:"20px"}}> - 거래가 발생하면, 이전 체인과 연결하기 위한 해시값을 찾아서 기존의 블록체인과 연결</Typography>
+                          <Typography variant='h5' style = {{"fontFamily" : "BMJUA", marginTop:"20px"}}> - 가장 먼저 해시값을 찾은 노드에게 보상이 주게 되고, 이를 "채굴"이라 함 </Typography>
+                          <Typography variant='h5' style = {{"fontFamily" : "BMJUA", marginTop:"20px"}}> - 비트코인은 화폐 거래만 가능한 반면, 이더리움은 블록에 계약 정보를 담을 수 있음 </Typography>
+                          <Typography variant='h5' style = {{"fontFamily" : "BMJUA", marginTop:"20px"}}> - 이 게임도 유저의 대부분의 행동을 블록으로 저장하고, 미리 코딩해둔 계약에 따라 진행됨</Typography>
                       </Grid>
                     </Grid>
                 }
