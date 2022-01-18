@@ -43,13 +43,27 @@ contract("CatBase", function([deployer, user1]){
 
     // })
 
-    it("feed cat test", async () => {
-
-        await cat.registerCat("test", {from:user1});
-        for(var i=0;i<1;i++){ 
-            var myCat = await cat.updateKittyId({from:user1});
-            console.log(myCat);
-        }
+    // it("feed and getSSC test", async () => {
+    //     console.log("===== in =====");
+    //     var acc = await cat.balanceOf(user1);
+    //     console.log(acc);
+    //     await cat.getSSC(3,{from:user1});
+    //     acc = await cat.balanceOf(user1);
+    //     console.log(acc);
+    //     console.log("===== out =====");
+    // })
+    it("feed and getSSC test", async () => {
+        cat = await CatBase.new("soso coin", "SSC");
+        console.log("===== in =====");
+        await cat.registerCat("jeho",{from:user1});
+        var cat = await cat.getMyCat({from:user1});
+        console.log(cat);
+        await cat.feed(3,{from:user1});
+        cat = await cat.getMyCat({from:user1});
+        console.log(cat);
+        console.log("===== out =====");
     })
+    
+    
 
 });

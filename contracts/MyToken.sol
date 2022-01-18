@@ -28,21 +28,24 @@ contract MyToken is ERC20{
         return true;
     }
 
-
     function SSCtoEth(uint256 value) public payable returns (bool){
         // user send SSC && owner send ETH
         address payable user = payable(msg.sender);
         require(transfer(owner, value) == true);
         user.transfer(value);
         emit EXCHANGE_SCC_TO_ETH(user, value);
-
         return true;
     }
 
     function useSSC(uint256 value) public payable returns (bool) {
         require(transfer(owner, value) == true);
         //address payable user = payable(msg.sender);
-        
+        return true;
+    }
+
+    function getSSC(uint256 value) public payable returns (bool) {
+        //address payable user = payable(msg.sender);
+         _transfer(owner, msg.sender, value*10**uint(decimals()));
         return true;
     }
 }

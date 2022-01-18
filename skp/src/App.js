@@ -26,6 +26,7 @@ function App(props) {
   const [script, setScript] = useState("안녕 반갑다냥");
   const [savedFishImage,setSavedFishImage] = useState([]);
   const [fishId,setFishId] = useState(0);
+  const [newFish, setNewFish] = useState(1);
 
   useEffect(() => {
     getContract();
@@ -96,12 +97,10 @@ function App(props) {
 
         <Grid item direction="column"  xs={3}>
           <Grid item style={{height:"500px"}}>
-            <Profile script={script} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/>
+            <Profile script={script} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} fishId={fishId}/>
           </Grid>
           <Grid item>
-            <Paper elevation={3} style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"} }>
-              <Inventory style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"}} accounts={accounts} instance={instance}  savedFishImage = {savedFishImage} setSavedFishImage={setSavedFishImage} setFishId={setFishId}/>
-            </Paper>
+            <Inventory accounts={accounts} instance={instance}  savedFishImage = {savedFishImage} setSavedFishImage={setSavedFishImage} setFishId={setFishId} userSSC={userSSC} userETH={userETH}/>
           </Grid>
         </Grid>
 
@@ -111,7 +110,7 @@ function App(props) {
             <Grid container style={{margin:"0 auto"}} direction="row">
               {
                 mode === 0 ?
-                <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
+                <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg} setFishId={setFishId}/>
                 : mode === 1 ?
                   <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
                   : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage} fishId={fishId}/>
@@ -125,7 +124,6 @@ function App(props) {
             <Button variant="text" style = {buttonStyle}  onClick={clickExchange}> <BsCurrencyExchange style = {iconStyle}/> </Button>
           </Grid>
         </Grid>
-        
       </Grid>
     </div>
   );

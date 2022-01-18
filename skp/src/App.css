@@ -90,4 +90,7 @@
   width: 0;
   z-index: 0;
 }
-
+.fish-img {
+  border: "1px solid black";
+  border-radius : "10px";
+}
