@@ -28,7 +28,7 @@ function Inventory(props) {
                 listFish();
         }
             
-    }, [props.instance])
+    }, [props.instance, props.notifyChange])
 
 
 

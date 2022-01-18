@@ -9,6 +9,8 @@ import fishImg2 from './image/fish2.png'
 import fishImg3 from './image/fish3.png'
 import fishImg4 from './image/fish4.png'
 import fishImg5 from './image/fish5.png'
+import ReactHowler from 'react-howler';
+import BGM from './BGM.mp3';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -20,8 +22,6 @@ function GameMain(props) {
     //init
     const interval = useRef();
 
-    var {setFishImg} = props;
-
     const [isStart, setIsStart] = useState(true);
     const [result, setResult] = useState(0);
     const [isMove, setIsMove] = useState(true); 
@@ -30,11 +30,13 @@ function GameMain(props) {
     const [modalOpen, setOpen] = useState(false);
     const [modalImg, setModalImg] = useState(0);
     const [fishcoin, setFishCoin] = useState(1);
+    const [Ppress, setPpress] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
         if(isStart) {
+            document.addEventListener('keydown', handleKeyP)
             document.addEventListener('keydown', handleKeySpace)
             interval.current = setInterval(() => {
                 setIsMove(true)
@@ -42,6 +44,7 @@ function GameMain(props) {
         }
         return () => {
             clearInterval(interval.current)
+            document.removeEventListener('keydown', handleKeyP)
             document.removeEventListener('keydown', handleKeySpace)
         }
     });
@@ -86,10 +89,18 @@ function GameMain(props) {
             checkConflict()
         }
     }
+    
+    // p 누르면 무조건 잡힘
+    const handleKeyP = (e) => {
+        if (e.keyCode === 80) {
+            setPpress(true)
+            checkConflict()
+        }
+    }
 
     // fish, fishing rod conflict
     function checkConflict() {
-        
+
         const fish1 = document.querySelector('img#fish1');
         const fish2 = document.querySelector('img#fish2');
         const fish3 = document.querySelector('img#fish3');
@@ -99,6 +110,23 @@ function GameMain(props) {
 
         console.log("fish: "+fish1)
         console.log("fishing: "+fishing)
+
+        if(Ppress === true) {
+            let num = Math.floor(Math.random() * 5) + 1
+            setFishCoin(num)
+            if(num === 1){
+                setModalImg(fish1)
+            } else if(num === 2) {
+                setModalImg(fish2)
+            } else if(num === 3) {
+                setModalImg(fish3)
+            } else if(num === 4) {
+                setModalImg(fish4)
+            } else if(num === 5) {
+                setModalImg(fish5)
+            } 
+            handleOpen()
+        }
         if( fish1 !== null && fishing !== null) {
             let dis = Math.pow(fish1.x - fishing.x, 2) + Math.pow(fish1.y - fishing.y, 2)
             console.log("dis: "+dis)
@@ -160,6 +188,7 @@ function GameMain(props) {
         await props.instance.methods.newFish(fishcoin).send();
         rodHandeler();
         handleClose();
+        props.setNotifyChange(new Date());
     }
 
     const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10,  "backgroundColor": "#21b6ae", "box-shadow" : "5px 5px 5px 5px gray"}; 
@@ -175,6 +204,7 @@ function GameMain(props) {
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg4} fishId="4"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg5} fishId="5"/>
                     <Fishing /> 
+                    <ReactHowler src={BGM} playing={true}/>
                     
                     <Modal
                         open={modalOpen}
@@ -188,7 +218,7 @@ function GameMain(props) {
                                     낚시 성공!
                                 </Typography>
                                 <Typography variant='h6' component='h2' align="center">
-                                    {"획득 코인: " + `${fishcoin}`}
+                                    {"고기 시세: " + `${fishcoin}`}
                                 </Typography>
                                 <img src={modalImg.src} style={{width: '200px', height: '200px'}}/>
                                 <Button variant="outlined" onClick={saveFish}>Save</Button>
