@@ -8,6 +8,8 @@ import {AiFillHome} from "react-icons/ai";
 import fishImg1 from './image/fish1.png'
 import fishImg2 from './image/fish2.png'
 import fishImg3 from './image/fish3.png'
+import fishImg4 from './image/fish4.png'
+import fishImg5 from './image/fish5.png'
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -24,8 +26,8 @@ function GameMain(props) {
     const [isStart, setIsStart] = useState(true);
     const [result, setResult] = useState(0);
     const [isMove, setIsMove] = useState(true);
-    const [minDis, setMinDis] = useState(140000);
-    const [maxDis, setMaxDis] = useState(160000);
+    const [minDis, setMinDis] = useState(145000);
+    const [maxDis, setMaxDis] = useState(155000);
 
     useEffect(() => {
         if(isStart) {
@@ -56,6 +58,8 @@ function GameMain(props) {
         let fish1 = document.querySelector('img#fish1');
         let fish2 = document.querySelector('img#fish2');
         let fish3 = document.querySelector('img#fish3');
+        let fish4 = document.querySelector('img#fish4');
+        let fish5 = document.querySelector('img#fish5');
         let fishing = document.querySelector('img#fishing');
 
         // console.log("fish: "+fish2)
@@ -64,15 +68,15 @@ function GameMain(props) {
             let dis = Math.pow(fish1.x - fishing.x, 2) + Math.pow(fish1.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert("낚시 성공!" + fish1.src)
-                //setResult 으로 낚은 물고기 보여주기    
+                alert(fish1.id + " 낚시 성공!")
+                //setResult 으로 낚은 물고기 보여주기
             }
         }
         if( fish2 !== null && fishing !== null) {
             let dis = Math.pow(fish2.x - fishing.x, 2) + Math.pow(fish2.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert("낚시 성공!" + fish2.src)
+                alert(fish2.id+ " 낚시 성공!")
                 //setResult 으로 낚은 물고기 보여주기    
             }
         }
@@ -80,10 +84,28 @@ function GameMain(props) {
             let dis = Math.pow(fish3.x - fishing.x, 2) + Math.pow(fish3.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert("낚시 성공!" + fish3.src)
+                alert(fish3.id+" 낚시 성공!")
                 //setResult 으로 낚은 물고기 보여주기    
             }
         }
+        if( fish4 !== null && fishing !== null) {
+            let dis = Math.pow(fish4.x - fishing.x, 2) + Math.pow(fish4.y - fishing.y, 2)
+            console.log("dis: "+dis)
+            if(dis >= minDis && dis <= maxDis){
+                alert(fish4.id+" 낚시 성공!")
+                //setResult 으로 낚은 물고기 보여주기    
+            }
+        }
+        if( fish5 !== null && fishing !== null) {
+            let dis = Math.pow(fish5.x - fishing.x, 2) + Math.pow(fish5.y - fishing.y, 2)
+            console.log("dis: "+dis)
+            if(dis >= minDis && dis <= maxDis){
+                alert(fish5.id+" 낚시 성공!")
+                //setResult 으로 낚은 물고기 보여주기    
+            }
+        }
+        
+        
         
         
     }
@@ -100,6 +122,8 @@ function GameMain(props) {
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg1} fishId="1"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg2} fishId="2"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg3} fishId="3"/>
+                    <Fish setFishImg= {props.setFishImg} fishImg={fishImg4} fishId="4"/>
+                    <Fish setFishImg= {props.setFishImg} fishImg={fishImg5} fishId="5"/>
                     <Fishing />
             </div>
                 

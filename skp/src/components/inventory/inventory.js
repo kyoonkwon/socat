@@ -53,10 +53,10 @@ function Inventory(props) {
     <Table>
         <TableBody>
             <TableRow>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[0]}.png)`, backgroundSize : "cover"}} onClick = {x=>clickEvent(1)} ></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[1]}.png)`, backgroundSize : "cover"}} onClick = {x=>clickEvent(2)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[2]}.png)`, backgroundSize : "cover"}} onClick = {x=>clickEvent(3)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[3]}.png)`, backgroundSize : "cover"}} onClick = {x=>clickEvent(4)}></TableCell>
+                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[0]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(1)} ></TableCell>
+                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[1]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(2)}></TableCell>
+                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[2]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(3)}></TableCell>
+                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[3]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(4)}></TableCell>
             </TableRow>
             <TableRow>
                     <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[4]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(5)}></TableCell>
