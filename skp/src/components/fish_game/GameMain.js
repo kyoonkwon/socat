@@ -33,13 +33,6 @@ function GameMain(props) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const fish1 = document.querySelector('img#fish1');
-    const fish2 = document.querySelector('img#fish2');
-    const fish3 = document.querySelector('img#fish3');
-    const fish4 = document.querySelector('img#fish4');
-    const fish5 = document.querySelector('img#fish5');
-    const fishing = document.querySelector('img#fishing');
-
     useEffect(() => {
         if(isStart) {
             document.addEventListener('keydown', handleKeySpace)
@@ -64,7 +57,14 @@ function GameMain(props) {
     }
 
     // fish, fishing rod conflict
-    function checkConflict() {                
+    function checkConflict() {
+        
+        const fish1 = document.querySelector('img#fish1');
+        const fish2 = document.querySelector('img#fish2');
+        const fish3 = document.querySelector('img#fish3');
+        const fish4 = document.querySelector('img#fish4');
+        const fish5 = document.querySelector('img#fish5');
+        const fishing = document.querySelector('img#fishing');                
 
         console.log("fish: "+fish1)
         console.log("fishing: "+fishing)

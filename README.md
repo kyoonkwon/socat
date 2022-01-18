@@ -26,15 +26,13 @@
 
 비용문제로 실제 이더리움 메인 네트워크에 배포하지 않고, 로컬에서 테스트만 진행하였음.
 
-코인은 openzeppelin의 ERC20을 상속하여 게임 기능에 맞게 수정하여 작성하였음.
+코인은 [openzeppelin]("https://github.com/OpenZeppelin/openzeppelin-contracts")의 ERC20을 상속하여 게임 기능에 맞게 수정하여 작성하였음.
 
 contract를 처음 배포한 노드를 owner 계정으로 설정하여, 최초 발행된 코인을 지급하며, 유저들이 게임플레이를 통하여 owner로부터 코인을 지급받는 방식.
 
-이더리움은 contract에 전송하고 발급받는 방식을 취함 
+이더리움은 contract에 전송하고 받는 방식을 취함 
 
 게임 전체는 CatBase Solidity Contract를 통해 클라이언트와 상호작용할 수 있도록 하였음.
-
-
 
 
 
@@ -45,7 +43,7 @@ contract를 처음 배포한 노드를 owner 계정으로 설정하여, 최초 �
 
 [부산대학교 정보컴퓨터공학부 18학번 이제호](https://github.com/jhl8109)
 
-[성균관대학교  18학번 김선우](https://github.com/Sunwoo0110)
+[성균관대학교 소프트웨어학과 20학번 김선우](https://github.com/Sunwoo0110)
 
 
 [KAIST 전산학부 17학번 권기훈](https://www.github.com/kyoonkwon)
