@@ -12,20 +12,14 @@ let originalX = 0;
 let originalY = 0;
 
 function Inventory(props) {
-    let list = new Array();
-
+    let list = props.savedFishImage;
+    console.log(list);
     const cellStyle = {height : "20px", border: "1px solid black", backgroundImage : `url(img/fish1.png)`, backgroundSize : "contain"};
     
+   
     async function clickEvent(id) {
-        listFish();
-        console.log(id);
-        console.log(list[id-1]);
-        if (list[id-1] == undefined) {
-                props.setSavedFishImage(0);
-        } else {
-                props.setSavedFishImage(list[id-1]);
-        }
-        
+        if (id == undefined) props.setFishId(0);    
+        else props.setFishId(list[id-1]);
     }
     useEffect(() => {
         console.log(props)
@@ -38,6 +32,7 @@ function Inventory(props) {
 
 
     async function listFish(){
+        list = [];
         let fishList = await props.instance.methods.getFish().call();
         console.log(fishList);
         for (let i = 1; i < fishList.length; i++) {
@@ -45,6 +40,7 @@ function Inventory(props) {
                         list.push(i);
                 }
         }
+        props.setSavedFishImage(list); 
         console.log(list);
     }
 
