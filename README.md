@@ -15,8 +15,7 @@
 물고기 움직임의 방향을 매번 랜덤하게 만들기 위해 setInterval 과 Math.random() 을 사용하였음.
 
 구매한 낚시대에 따라 물고기가 잡히는 범위를 state로 조정하였음.
-
-
+   
 ### 낚시대 뽑기
 
 
@@ -43,12 +42,10 @@ contract를 처음 배포한 노드를 owner 계정으로 설정하여, 최초 �
 
 ### Frontend
 
-
 ## Made By.
 
 [부산대학교 정보컴퓨터공학부 18학번 이제호](https://github.com/jhl8109)
 
 [성균관대학교 소프트웨어학과 20학번 김선우](https://github.com/Sunwoo0110)
-
 
 [KAIST 전산학부 17학번 권기훈](https://www.github.com/kyoonkwon)

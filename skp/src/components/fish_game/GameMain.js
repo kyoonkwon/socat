@@ -9,6 +9,8 @@ import fishImg2 from './image/fish2.png'
 import fishImg3 from './image/fish3.png'
 import fishImg4 from './image/fish4.png'
 import fishImg5 from './image/fish5.png'
+import ReactHowler from 'react-howler';
+import BGM from './BGM.mp3';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -20,8 +22,6 @@ function GameMain(props) {
     //init
     const interval = useRef();
 
-    var {setFishImg} = props;
-
     const [isStart, setIsStart] = useState(true);
     const [result, setResult] = useState(0);
     const [isMove, setIsMove] = useState(true); 
@@ -30,11 +30,13 @@ function GameMain(props) {
     const [modalOpen, setOpen] = useState(false);
     const [modalImg, setModalImg] = useState(0);
     const [fishcoin, setFishCoin] = useState(1);
+    const [Ppress, setPpress] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
         if(isStart) {
+            document.addEventListener('keydown', handleKeyP)
             document.addEventListener('keydown', handleKeySpace)
             interval.current = setInterval(() => {
                 setIsMove(true)
@@ -42,9 +44,41 @@ function GameMain(props) {
         }
         return () => {
             clearInterval(interval.current)
+            document.removeEventListener('keydown', handleKeyP)
             document.removeEventListener('keydown', handleKeySpace)
         }
     });
+
+    async function rodHandeler() {
+        var rod =  await props.instance.methods.getRod().call();
+        switch(rod) {
+            case 1 :
+                setMinDis(145000);
+                setMaxDis(155000);
+                break;
+            case 2 :
+                setMinDis(144000);
+                setMaxDis(156000);
+                break;    
+            case 3 :
+                setMinDis(143000);
+                setMaxDis(157000);
+                break;
+            case 4 :
+                setMinDis(142000);
+                setMaxDis(157000);
+                break;
+            case 5 :
+                setMinDis(141000);
+                setMaxDis(158000);
+                break;
+            default :
+                await props.instance.methods.newRod(0,0).call();  
+                break;  
+        }    
+
+
+    }
 
     const classes = useStyles();
 
@@ -52,6 +86,14 @@ function GameMain(props) {
     const handleKeySpace = (e) => {
         if (e.keyCode === 32) {
             console.log("click")
+            checkConflict()
+        }
+    }
+    
+    // p 누르면 무조건 잡힘
+    const handleKeyP = (e) => {
+        if (e.keyCode === 80) {
+            setPpress(true)
             checkConflict()
         }
     }
@@ -68,6 +110,23 @@ function GameMain(props) {
 
         console.log("fish: "+fish1)
         console.log("fishing: "+fishing)
+
+        if(Ppress === true) {
+            let num = Math.floor(Math.random() * 5) + 1
+            setFishCoin(num)
+            if(num === 1){
+                setModalImg(fish1)
+            } else if(num === 2) {
+                setModalImg(fish2)
+            } else if(num === 3) {
+                setModalImg(fish3)
+            } else if(num === 4) {
+                setModalImg(fish4)
+            } else if(num === 5) {
+                setModalImg(fish5)
+            } 
+            handleOpen()
+        }
         if( fish1 !== null && fishing !== null) {
             let dis = Math.pow(fish1.x - fishing.x, 2) + Math.pow(fish1.y - fishing.y, 2)
             console.log("dis: "+dis)
@@ -127,8 +186,7 @@ function GameMain(props) {
 
     async function saveFish(){
         await props.instance.methods.newFish(fishcoin).send();
-        console.log(fishcoin);
-        console.log("clicked");
+        rodHandeler();
         handleClose();
         props.setNotifyChange(new Date());
     }
@@ -146,6 +204,7 @@ function GameMain(props) {
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg4} fishId="4"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg5} fishId="5"/>
                     <Fishing /> 
+                    <ReactHowler src={BGM} playing={true}/>
                     
                     <Modal
                         open={modalOpen}
