@@ -9,6 +9,8 @@ import fishImg2 from './image/fish2.png'
 import fishImg3 from './image/fish3.png'
 import fishImg4 from './image/fish4.png'
 import fishImg5 from './image/fish5.png'
+import ReactHowler from 'react-howler';
+import BGM from './BGM.mp3';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -19,8 +21,6 @@ const useStyles = makeStyles(() => ({
 function GameMain(props) {
     //init
     const interval = useRef();
-
-    var {setFishImg} = props;
 
     const [isStart, setIsStart] = useState(true);
     const [result, setResult] = useState(0);
@@ -142,6 +142,7 @@ function GameMain(props) {
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg4} fishId="4"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg5} fishId="5"/>
                     <Fishing /> 
+                    <ReactHowler src={BGM} playing={true}/>
                     
                     <Modal
                         open={modalOpen}
