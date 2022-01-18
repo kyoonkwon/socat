@@ -26,7 +26,7 @@ export default function Exchange(props) {
             props.updateBalance();
 
         } else {
-            await props.instance.methods.deleteFish(props.fishId).send;
+            await props.instance.methods.deleteFish(props.fishId).send();
             props.updateBalance();
         }
     }

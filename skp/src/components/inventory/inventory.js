@@ -51,7 +51,7 @@ function Inventory(props) {
         <Typography component="div" sx={{ flexGrow: 1 }} style = {{"fontSize":"20px","fontFamily" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
              {`소소코인 잔고 ${(props.userSSC / (10 ** 18))}    이더리움 잔고 ${props.userETH / (10 ** 18)}`}
           </Typography>
-        <ImageList cols={4}>  
+        <ImageList cols={4} >  
                 {list.map((elem, idx) => {
                         return(
                         <ImageListItem onClick={x => {clickEvent(idx)}} style = {clicked===idx ? clickedStyle : fishStyle} key={`${idx}`}><img src={`img/fish${elem}.png`} alt={"noImage"} loading="lazy"/> </ImageListItem>)

@@ -46,6 +46,37 @@ function GameMain(props) {
         }
     });
 
+    async function rodHandeler() {
+        var rod =  await props.instance.methods.getRod().call();
+        switch(rod) {
+            case 1 :
+                setMinDis(145000);
+                setMaxDis(155000);
+                break;
+            case 2 :
+                setMinDis(144000);
+                setMaxDis(156000);
+                break;    
+            case 3 :
+                setMinDis(143000);
+                setMaxDis(157000);
+                break;
+            case 4 :
+                setMinDis(142000);
+                setMaxDis(157000);
+                break;
+            case 5 :
+                setMinDis(141000);
+                setMaxDis(158000);
+                break;
+            default :
+                await props.instance.methods.newRod(0,0).call();  
+                break;  
+        }    
+
+
+    }
+
     const classes = useStyles();
 
     // space 누를때 conflict 체크하기
@@ -127,8 +158,7 @@ function GameMain(props) {
 
     async function saveFish(){
         await props.instance.methods.newFish(fishcoin).send();
-        console.log(fishcoin);
-        console.log("clicked");
+        rodHandeler();
         handleClose();
     }
 
