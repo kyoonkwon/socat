@@ -92,7 +92,7 @@ function App(props) {
           </Typography>
         </AppBar>
       </Box>
-      <Grid container style={{margin:"0 auto"}} direction="row" justifyContent="center" spacing={3}>
+      <Grid container style={{margin:"0 auto", width:"100%"}} direction="row" justifyContent="center" spacing={3}>
 
         <Grid item direction="column"  xs={3}>
           <Grid item style={{height:"500px"}}>
@@ -106,17 +106,17 @@ function App(props) {
         </Grid>
 
 
-        <Grid item xs={6} direction="column" justifyContent="flex-start">
-          <Paper style={{height:"630px", display:"flex", alignItems:"center"}}>
-          <Grid container style={{margin:"0 auto", height:"100%"}} direction="row">
-            {
-              mode === 0 ?
-              <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
-              : mode === 1 ?
-                <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
-                : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage} fishId={fishId}/>
-              }
-          </Grid>
+        <Grid item xs={6} direction="column">
+          <Paper style={{height:"630px", display:"flex"}}>
+            <Grid container style={{margin:"0 auto"}} direction="row">
+              {
+                mode === 0 ?
+                <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
+                : mode === 1 ?
+                  <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
+                  : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage} fishId={fishId}/>
+                }
+            </Grid>
           </Paper>
 
           <Grid item>

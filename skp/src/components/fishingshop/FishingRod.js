@@ -1,5 +1,5 @@
 import React, {  useEffect, useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import ReactCardFlip from 'react-card-flip';
 import {Grid} from '@mui/material';
 
@@ -51,17 +51,22 @@ function FishingRod(props) {
   const rand2 = Math.floor(Math.random() * 6 + 1);
   const rand3 = Math.floor(Math.random() * 5 + 3);
   return (
-          <>
-            <Grid item xs={4}>
-              <FlipCard setUserSSC = {props.setUserSSC} name = "쪽 박" price = "5" url = "img/kb.png" rodUrl = {`img/rod${rand1}.webp`} setMode = {setMode} instance = {props.instance} index = "1" setRod = {props.setRod} rand = {rand1} accounts = {props.accounts}></FlipCard>
+          <Grid direction="column" style={{marginBottom:'50px'}}>
+            <Grid style={{height:"100px"}}>
+              <Typography variant='h3' style = {{"fontFamily" : "BMJUA", paddingTop:"10px"}}>~ 낚시대 뽑기 ~</Typography>
             </Grid>
-            <Grid item xs={4}>  
-              <FlipCard setUserSSC = {props.setUserSSC} name = "중 박" price = "10" url = "img/lotte.jpg" rodUrl = {`img/rod${rand2}.webp`} setMode = {setMode} instance = {props.instance} index = "2" setRod = {props.setRod} rand = {rand2} accounts = {props.accounts}></FlipCard>
+            <Grid container direction="row" style={{height:"400px", alignItems:"center"}}>
+              <Grid item xs={4}>
+                <FlipCard setUserSSC = {props.setUserSSC} name = "쪽 박" price = "5" url = "img/kb.png" rodUrl = {`img/rod${rand1}.webp`} setMode = {setMode} instance = {props.instance} index = "1" setRod = {props.setRod} rand = {rand1} accounts = {props.accounts}></FlipCard>
+              </Grid>
+              <Grid item xs={4}>  
+                <FlipCard setUserSSC = {props.setUserSSC} name = "중 박" price = "10" url = "img/lotte.jpg" rodUrl = {`img/rod${rand2}.webp`} setMode = {setMode} instance = {props.instance} index = "2" setRod = {props.setRod} rand = {rand2} accounts = {props.accounts}></FlipCard>
+              </Grid>
+              <Grid item xs={4}>  
+                <FlipCard setUserSSC = {props.setUserSSC} name = "대 박" price = "15" url = "img/shinhan.png" rodUrl = {`img/rod${rand3}.webp`} setMode = {setMode} instance = {props.instance} index = "3" setRod = {props.setRod} rand = {rand3} accounts = {props.accounts}></FlipCard>
+              </Grid>
             </Grid>
-            <Grid item xs={4}>  
-              <FlipCard setUserSSC = {props.setUserSSC} name = "대 박" price = "15" url = "img/shinhan.png" rodUrl = {`img/rod${rand3}.webp`} setMode = {setMode} instance = {props.instance} index = "3" setRod = {props.setRod} rand = {rand3} accounts = {props.accounts}></FlipCard>
-            </Grid>
-          </>
+          </Grid>
   );
 }
 export default FishingRod;

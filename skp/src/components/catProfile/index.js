@@ -102,7 +102,7 @@ export default function Profile(props) {
                         </>
                         : 
                         <>
-                        <TextField onChange={v => setCatName(v.target.value)}/>
+                        <TextField onChange={v => setCatName(v.target.value)} style={{marginLeft:"20px"}}/>
                         <Button variant="contained" onClick={registerCat} style={fontStyle}>분양받기</Button>
                         </>
                     }
@@ -120,8 +120,8 @@ export default function Profile(props) {
                 <Box display="flex" style={modalStyle}>
                     {prevCats.map((elem, idx) => {
                     return(
-                    <Paper key={idx} style={{width:"150px"}}>
-                        <img src={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${elem}`} />
+                    <Paper key={idx} style={{height:"300px"}}>
+                        <img style={{width:"100%", height:"100%"}} src={`https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/${elem}`} />
                     </Paper>)
                 })}
                 </Box>
@@ -135,7 +135,7 @@ const modalStyle = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 1500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,

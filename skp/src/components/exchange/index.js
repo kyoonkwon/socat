@@ -26,7 +26,7 @@ export default function Exchange(props) {
 
             await props.instance.methods.SSCtoEth((coinValue * (10 ** 18)).toString()).send();
             props.updateBalance();
-            
+
         } else {
         }
     }
@@ -76,7 +76,7 @@ export default function Exchange(props) {
                                 <Typography variant="h5" style={{margin:"auto", fontFamily : "BMJUA"}}>{" >>>"}</Typography>
                             </Grid>
                             <Grid item xs={5} style={{height:"200px"}}>
-                                <img alt="ssc" src={"https://w.namu.la/s/233f5b353d9bd32fed47802d06c99bf2bb563165cfbb1b0916144f7663ddeaad6b65f481e0d1fe67f9e30b7464c0e8d6177028db551cf61248e82be00f93d8e8d852c85251884cc878293790d4f2fad93a6872e384b6ea11501643664191cb42"}
+                                <img alt="ssc" src={"img/ssc.png"}
                                     style={{width:"100%", maxHeight:"200px", maxWidth:"200px"}}>
                                 </img>
                             </Grid>
@@ -94,7 +94,7 @@ export default function Exchange(props) {
                     : selectedValue === "1" ?
                         <Grid container direction="row" style={{height:"300px"}}>
                             <Grid item xs={5} style={{height:"200px"}}>
-                            <img alt="ssc" src={"https://w.namu.la/s/233f5b353d9bd32fed47802d06c99bf2bb563165cfbb1b0916144f7663ddeaad6b65f481e0d1fe67f9e30b7464c0e8d6177028db551cf61248e82be00f93d8e8d852c85251884cc878293790d4f2fad93a6872e384b6ea11501643664191cb42"}
+                            <img alt="ssc" src={"img/ssc.png"}
                                 style={{width:"100%", maxHeight:"200px", maxWidth:"200px"}}>
                             </img>
                         </Grid>
@@ -125,7 +125,7 @@ export default function Exchange(props) {
                             <Typography variant="h5" style={{margin:"auto", fontFamily : "BMJUA"}}>{" >>>"}</Typography>
                         </Grid>
                         <Grid item xs={5} style={{height:"200px"}}>
-                            <img alt="ssc" src={"https://w.namu.la/s/233f5b353d9bd32fed47802d06c99bf2bb563165cfbb1b0916144f7663ddeaad6b65f481e0d1fe67f9e30b7464c0e8d6177028db551cf61248e82be00f93d8e8d852c85251884cc878293790d4f2fad93a6872e384b6ea11501643664191cb42"}
+                            <img alt="ssc" src={"img/ssc.png"}
                                 style={{width:"100%", maxHeight:"200px", maxWidth:"200px"}}>
                             </img>
                         </Grid>
