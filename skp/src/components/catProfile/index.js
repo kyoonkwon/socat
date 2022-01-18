@@ -43,6 +43,7 @@ export default function Profile(props) {
         var cat = await props.instance.methods.getMyCat().call();
         setCat(cat);
         setScript("우웩. 이걸 밥이라고 준거냥")
+        props.setNotifyChange(new Date());
     }
 
     async function getPrevCats(){

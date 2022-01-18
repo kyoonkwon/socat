@@ -58,7 +58,7 @@ function GameMain(props) {
 
     // fish, fishing rod conflict
     function checkConflict() {
-        
+
         const fish1 = document.querySelector('img#fish1');
         const fish2 = document.querySelector('img#fish2');
         const fish3 = document.querySelector('img#fish3');
@@ -130,6 +130,7 @@ function GameMain(props) {
         console.log(fishcoin);
         console.log("clicked");
         handleClose();
+        props.setNotifyChange(new Date());
     }
 
     const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10,  "backgroundColor": "#21b6ae", "box-shadow" : "5px 5px 5px 5px gray"}; 
@@ -158,7 +159,7 @@ function GameMain(props) {
                                     낚시 성공!
                                 </Typography>
                                 <Typography variant='h6' component='h2' align="center">
-                                    {"획득 코인: " + `${fishcoin}`}
+                                    {"고기 시세: " + `${fishcoin}`}
                                 </Typography>
                                 <img src={modalImg.src} style={{width: '200px', height: '200px'}}/>
                                 <Button variant="outlined" onClick={saveFish}>Save</Button>
