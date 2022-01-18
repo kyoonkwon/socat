@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef} from 'react';
 import SeaImg from './image/background.jpg';
-import Fish, { checkConflict } from './Fish';
+import Fish from './Fish';
 import Fishing from './Fishing';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import {AiFillHome} from "react-icons/ai";
+import { Modal, Box, Paper, Typography, Button } from '@material-ui/core'
 import fishImg1 from './image/fish1.png'
 import fishImg2 from './image/fish2.png'
 import fishImg3 from './image/fish3.png'
@@ -25,9 +24,21 @@ function GameMain(props) {
 
     const [isStart, setIsStart] = useState(true);
     const [result, setResult] = useState(0);
-    const [isMove, setIsMove] = useState(true);
+    const [isMove, setIsMove] = useState(true); 
     const [minDis, setMinDis] = useState(145000);
     const [maxDis, setMaxDis] = useState(155000);
+    const [modalOpen, setOpen] = useState(false);
+    const [modalImg, setModalImg] = useState(0);
+    const [fishcoin, setFishCoin] = useState(1);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const fish1 = document.querySelector('img#fish1');
+    const fish2 = document.querySelector('img#fish2');
+    const fish3 = document.querySelector('img#fish3');
+    const fish4 = document.querySelector('img#fish4');
+    const fish5 = document.querySelector('img#fish5');
+    const fishing = document.querySelector('img#fishing');
 
     useEffect(() => {
         if(isStart) {
@@ -53,22 +64,18 @@ function GameMain(props) {
     }
 
     // fish, fishing rod conflict
-    function checkConflict(props) {                
-        
-        let fish1 = document.querySelector('img#fish1');
-        let fish2 = document.querySelector('img#fish2');
-        let fish3 = document.querySelector('img#fish3');
-        let fish4 = document.querySelector('img#fish4');
-        let fish5 = document.querySelector('img#fish5');
-        let fishing = document.querySelector('img#fishing');
+    function checkConflict() {                
 
-        // console.log("fish: "+fish2)
-        // console.log("fishing: "+fishing)
+        console.log("fish: "+fish1)
+        console.log("fishing: "+fishing)
         if( fish1 !== null && fishing !== null) {
             let dis = Math.pow(fish1.x - fishing.x, 2) + Math.pow(fish1.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert(fish1.id + " 낚시 성공!")
+                setFishCoin(1)
+                setModalImg(fish1)
+                handleOpen();
+                //alert(fish1.id + " 낚시 성공!")
                 //setResult 으로 낚은 물고기 보여주기
             }
         }
@@ -76,7 +83,10 @@ function GameMain(props) {
             let dis = Math.pow(fish2.x - fishing.x, 2) + Math.pow(fish2.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert(fish2.id+ " 낚시 성공!")
+                setFishCoin(2)
+                setModalImg(fish2)
+                handleOpen();
+                //alert(fish2.id+ " 낚시 성공!")
                 //setResult 으로 낚은 물고기 보여주기    
             }
         }
@@ -84,7 +94,10 @@ function GameMain(props) {
             let dis = Math.pow(fish3.x - fishing.x, 2) + Math.pow(fish3.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert(fish3.id+" 낚시 성공!")
+                setFishCoin(3)
+                setModalImg(fish3)
+                handleOpen();
+                //alert(fish3.id+" 낚시 성공!")
                 //setResult 으로 낚은 물고기 보여주기    
             }
         }
@@ -92,7 +105,10 @@ function GameMain(props) {
             let dis = Math.pow(fish4.x - fishing.x, 2) + Math.pow(fish4.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert(fish4.id+" 낚시 성공!")
+                setFishCoin(4)
+                setModalImg(fish4)
+                handleOpen();
+                //alert(fish4.id+" 낚시 성공!")
                 //setResult 으로 낚은 물고기 보여주기    
             }
         }
@@ -100,14 +116,17 @@ function GameMain(props) {
             let dis = Math.pow(fish5.x - fishing.x, 2) + Math.pow(fish5.y - fishing.y, 2)
             console.log("dis: "+dis)
             if(dis >= minDis && dis <= maxDis){
-                alert(fish5.id+" 낚시 성공!")
+                setFishCoin(5)
+                setModalImg(fish5)
+                handleOpen();
+                //alert(fish5.id+" 낚시 성공!")
                 //setResult 으로 낚은 물고기 보여주기    
             }
-        }
-        
-        
-        
-        
+        }       
+    }
+
+    function saveFish(){
+        console.log("Save!")
     }
 
     const buttonStyle = {"width" : 120 ,"height" : 70, "margin" : 10,  "backgroundColor": "#21b6ae", "box-shadow" : "5px 5px 5px 5px gray"}; 
@@ -116,20 +135,49 @@ function GameMain(props) {
     return (
             
             <div id="fish_game" style={{width:"100%", height:"100%", backgroundImage:"url(img/background.jpg)"}}>
-                    {/* <div className={classes.timer}>
-                        <div style={{padding: '10px', fontSize: '40px', font: 'bold'   }}>낚시 게임</div>
-                    </div> */}
+                    
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg1} fishId="1"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg2} fishId="2"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg3} fishId="3"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg4} fishId="4"/>
                     <Fish setFishImg= {props.setFishImg} fishImg={fishImg5} fishId="5"/>
-                    <Fishing />
+                    <Fishing /> 
+                    
+                    <Modal
+                        open={modalOpen}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                        >
+                        <Box display="flex" style={modalStyle} alignContent='vertical' textAlign='center' >
+                            <Paper>
+                                <Typography variant='h4' component='h2' align="center">
+                                    낚시 성공!
+                                </Typography>
+                                <Typography variant='h6' component='h2' align="center">
+                                    {"획득 코인: " + `${fishcoin}`}
+                                </Typography>
+                                <img src={modalImg.src} style={{width: '200px', height: '200px'}}/>
+                                <Button variant="outlined" onclick={saveFish}>Save</Button>
+                            </Paper>
+                        </Box>
+                    </Modal>
             </div>
-                
-
-                             
             
     )
 }
 export default GameMain;
+
+const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '200px',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    justifyContent:"center",
+    margin:"10px 10px",
+  };
