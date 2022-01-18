@@ -15,7 +15,7 @@ import {BsCurrencyExchange} from 'react-icons/bs';
 function App(props) {
 
   const [rod,setRod] = useState(0);
-  const [mode, setMode] = useState(1);
+  const [mode, setMode] = useState(3);
   const [web3, setWeb3] = useState(0);
   const [accounts, setAccounts] = useState(0);
   const [instance, setInstance] = useState(0);
@@ -26,6 +26,8 @@ function App(props) {
   const [script, setScript] = useState("안녕 반갑다냥");
   const [savedFishImage,setSavedFishImage] = useState([]);
   const [fishId,setFishId] = useState(0);
+  const [newFish, setNewFish] = useState(1);
+  const [notifyChange, setNotifyChange] = useState(0);
 
   useEffect(() => {
     getContract();
@@ -35,6 +37,10 @@ function App(props) {
     if(instance !== 0)
       getAccounts();
   }, [instance])
+
+  useEffect(() => {
+    console.log(notifyChange);
+  }, [notifyChange])
 
   function clickFishing() {
     setMode(0);
@@ -87,8 +93,8 @@ function App(props) {
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='static'>
- <Typography variant="h3" component="div" sx={{ flexGrow: 1 }} style = {{"fontFamily" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
-             {`소소코인 잔고 ${(userSSC / (10 ** 18))}    이더리움 잔고 ${userETH / (10 ** 18)}`}
+          <Typography variant="h3" component="div" sx={{ flexGrow: 1 }} style = {{"fontFamily" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
+             {`SOCAT`}
           </Typography>
         </AppBar>
       </Box>
@@ -96,12 +102,10 @@ function App(props) {
 
         <Grid item direction="column"  xs={3}>
           <Grid item style={{height:"500px"}}>
-            <Profile script={script} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/>
+            <Profile setNotifyChange={setNotifyChange} script={script} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} fishId={fishId}/>
           </Grid>
           <Grid item>
-            <Paper elevation={3} style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"} }>
-              <Inventory style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"}} accounts={accounts} instance={instance}  savedFishImage = {savedFishImage} setSavedFishImage={setSavedFishImage} setFishId={setFishId}/>
-            </Paper>
+            <Inventory notifyChange={notifyChange} accounts={accounts} instance={instance}  savedFishImage = {savedFishImage} setSavedFishImage={setSavedFishImage} setFishId={setFishId} userSSC={userSSC} userETH={userETH}/>
           </Grid>
         </Grid>
 
@@ -111,10 +115,26 @@ function App(props) {
             <Grid container style={{margin:"0 auto"}} direction="row">
               {
                 mode === 0 ?
-                <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
+                <GameMain setNotifyChange={setNotifyChange} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg} setFishId={setFishId}/>
                 : mode === 1 ?
                   <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
-                  : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage} fishId={fishId}/>
+                  : mode == 2? <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage} fishId={fishId}/>
+                    :
+                    <Grid direction="column" style={{width:"100%", height:"100%"}} justifyContent="flex-start">
+                      <Grid style={{height:"100px"}}>
+                          <Typography variant='h3' style = {{"fontFamily" : "BMJUA", paddingTop:"10px"}}>블록체인이란</Typography>
+                      </Grid>
+                      <Grid style={{height:"500px"}}>
+                          <p>
+                            
+                            - 중앙 서버가 아닌 네트워크에 참가하는 모든 공동체가 거래를 기록하고 관리
+                            - 각 거래는 블록의 형태로 저장되며 이 거래가 체인처럼 연결되어 블록체인이라고 부름
+                            -  거래를 통하여 블록이 생성되면 이를 검증하는 과정이 필요함. 
+                            - 거래 발생을 인지한 노드들이 해시값을 찾아서 기존의 블록체인과 연결을 하게 되고, 가장 먼저 해시값을 찾은 노드에게 보상이 주어짐(채굴)
+                            - 비트코인은 탈중앙화된
+                          </p>
+                      </Grid>
+                    </Grid>
                 }
             </Grid>
           </Paper>
@@ -125,7 +145,6 @@ function App(props) {
             <Button variant="text" style = {buttonStyle}  onClick={clickExchange}> <BsCurrencyExchange style = {iconStyle}/> </Button>
           </Grid>
         </Grid>
-        
       </Grid>
     </div>
   );

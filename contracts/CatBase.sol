@@ -75,11 +75,12 @@ contract CatBase is MyToken{
         afterId = cat.kittyId;
     }
 
-    function feed() public{
+    function feed(uint32 fish) public{
         string memory beforeId;
         string memory afterId;
         (beforeId, afterId) = updateKittyId();
         emit FeedCat(msg.sender, beforeId, afterId);
+        deleteFish(fish);
     }
     //contract 말고 내부에 선언
   event NewRod(address fisher);
@@ -151,6 +152,7 @@ contract CatBase is MyToken{
   function deleteFish(uint32 index) public returns(bool success) {
     fishList[msg.sender][index] = fishList[msg.sender][index] - 1;
     emit DeleteFish(index);
+    getSSC(index);
     return true;
   }
 }

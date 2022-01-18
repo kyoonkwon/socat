@@ -1,8 +1,7 @@
-import React, {useEffect} from "react";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
+import React, {useEffect, useState} from "react";
+import { ImageList, ImageListItem,ImageListItemBar } from '@mui/material';
+import {Typography} from '@material-ui/core';
+import '../../App.css';
 
 
 let posX = 0;
@@ -13,13 +12,15 @@ let originalY = 0;
 
 function Inventory(props) {
     let list = props.savedFishImage;
-    console.log(list);
-    const cellStyle = {height : "20px", border: "1px solid black", backgroundImage : `url(img/fish1.png)`, backgroundSize : "contain"};
-    
+    console.log(list);    
+    const [clicked, setClicked] = useState(null);
    
-    async function clickEvent(id) {
-        if (id == undefined) props.setFishId(0);    
-        else props.setFishId(list[id-1]);
+    async function clickEvent(x) {
+        if (x === undefined) props.setFishId(0);    
+        else {
+                setClicked(x);
+                props.setFishId(list[x]);
+        }
     }
     useEffect(() => {
         console.log(props)
@@ -27,7 +28,7 @@ function Inventory(props) {
                 listFish();
         }
             
-    }, [props.instance])
+    }, [props.instance, props.notifyChange])
 
 
 
@@ -43,41 +44,19 @@ function Inventory(props) {
         props.setSavedFishImage(list); 
         console.log(list);
     }
-
-
-
-//    let rod = props.rod;
-//    const cellStyle = {border: "1px solid black", margin : "0 auto", justifyContent : "center" ,alignItems:"center", backgroundImage : `url(img/fish${rod}.png)`, backgroundSize : "100%"};
+   const fishStyle = { border: "1px solid black", borderRadius : "10px"};
+   const clickedStyle = {border: "3px solid black", borderRadius : "10px"};
    return (
-    <div>
-    <Table>
-        <TableBody>
-            <TableRow>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[0]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(1)} ></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[1]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(2)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[2]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(3)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[3]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(4)}></TableCell>
-            </TableRow>
-            <TableRow>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[4]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(5)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[5]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(6)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[6]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(7)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[7]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(8)}></TableCell>
-            </TableRow>
-            <TableRow>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[8]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(9)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[9]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(10)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[10]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(11)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[11]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(12)}></TableCell>
-            </TableRow>
-            <TableRow>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[12]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(13)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[13]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(14)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[14]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(15)}></TableCell>
-                    <TableCell alt = {"noImage"} style = {{height : "20px", border: "1px solid black", backgroundImage : `url(img/fish${list[15]}.png)`, backgroundSize : "contain"}} onClick = {x=>clickEvent(16)}></TableCell>
-            </TableRow>
-        </TableBody>
-    </Table>
+    <div style={{"maringTop" : "50px"}}>
+        <Typography component="div" sx={{ flexGrow: 1 }} style = {{"fontSize":"20px","fontFamily" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
+             {`소소코인 잔고 ${(props.userSSC / (10 ** 18))}    이더리움 잔고 ${props.userETH / (10 ** 18)}`}
+          </Typography>
+        <ImageList cols={4}>  
+                {list.map((elem, idx) => {
+                        return(
+                        <ImageListItem onClick={x => {clickEvent(idx)}} style = {clicked===idx ? clickedStyle : fishStyle} key={`${idx}`}><img src={`img/fish${elem}.png`} alt={"noImage"} loading="lazy"/> </ImageListItem>)
+                })}
+        </ImageList>
     </div>
    )
 }

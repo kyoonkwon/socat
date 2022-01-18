@@ -39,10 +39,11 @@ export default function Profile(props) {
     }
 
     async function changeCat(){
-        await props.instance.methods.feed().send();
+        await props.instance.methods.feed(props.fishId).send();
         var cat = await props.instance.methods.getMyCat().call();
         setCat(cat);
         setScript("우웩. 이걸 밥이라고 준거냥")
+        props.setNotifyChange(new Date());
     }
 
     async function getPrevCats(){

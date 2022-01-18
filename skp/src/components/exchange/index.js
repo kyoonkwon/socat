@@ -19,15 +19,15 @@ export default function Exchange(props) {
     async function exchange(){
 
         if(selectedValue === "0"){
-
             await props.instance.methods.ethToSSC().send({value:(coinValue * (10 ** 18)).toString()});
             props.updateBalance();
         } else if (selectedValue === '1'){
-
             await props.instance.methods.SSCtoEth((coinValue * (10 ** 18)).toString()).send();
             props.updateBalance();
 
         } else {
+            await props.instance.methods.deleteFish(props.fishId).send;
+            props.updateBalance();
         }
     }
 
