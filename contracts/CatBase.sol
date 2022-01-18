@@ -30,7 +30,7 @@ contract CatBase is MyToken{
 
     constructor(string memory name, string memory symbol) MyToken(name, symbol){
 
-        for(uint16 i=1;i<=5;i++){
+        for(uint16 i=1;i<=15;i++){
             idToIndex[kittyIds[i]] = i;
         }
 
@@ -45,13 +45,12 @@ contract CatBase is MyToken{
 
 
     function registerCat(string memory catName) public {
-
-        if(ownerToCat[msg.sender] == 0){
-            uint16 random = _makeRandom();
-            cats.push(Cat(catName, kittyPrices[random], block.timestamp, kittyIds[random]));
-            ownerToCat[msg.sender] = ++catCounts;
-            emit NewCat("test", kittyIds[random]);
-        }
+        require(ownerToCat[msg.sender] == 0);
+        uint16 random = _makeRandom();
+        cats.push(Cat(catName, kittyPrices[random], block.timestamp, kittyIds[random]));
+        ownerToCat[msg.sender] = ++catCounts;
+        emit NewCat("test", kittyIds[random]);
+        
         
     }
 
@@ -67,18 +66,18 @@ contract CatBase is MyToken{
     }
 
 
-    function updateKittyId() internal returns(string memory beforeId, string memory afterId){
+    function updateKittyId() public returns(string memory beforeId, string memory afterId){
 
         Cat storage cat = cats[_getMyCatIdx()];
         beforeId = cat.kittyId;
-        cat.kittyId = kittyIds[(idToIndex[beforeId])%15 + 1];
+        uint16 idx = (idToIndex[beforeId])%15 + 1;
+        cat.kittyId = kittyIds[idx];
         afterId = cat.kittyId;
     }
 
     function feed() public{
         string memory beforeId;
         string memory afterId;
-
         (beforeId, afterId) = updateKittyId();
         emit FeedCat(msg.sender, beforeId, afterId);
     }

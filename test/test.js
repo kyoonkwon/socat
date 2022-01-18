@@ -8,13 +8,13 @@ contract("CatBase", function([deployer, user1]){
     beforeEach(async () => {
         console.log("===== before each =====");
         cat = await CatBase.new("soso coin", "SSC");
-        var owner = await cat.getOwner();
-        var ownerEth = await web3.eth.getBalance(owner);
-        var ownerSSC = await cat.balanceOf(owner);
-        var user1SSC = await cat.balanceOf(user1);
-        console.log(ownerEth);
-        console.log(ownerSSC);
-        console.log(user1SSC);
+        // var owner = await cat.getOwner();
+        // var ownerEth = await web3.eth.getBalance(owner);
+        // var ownerSSC = await cat.balanceOf(owner);
+        // var user1SSC = await cat.balanceOf(user1);
+        // console.log(ownerEth);
+        // console.log(ownerSSC);
+        // console.log(user1SSC);
 
         
     })
@@ -34,13 +34,22 @@ contract("CatBase", function([deployer, user1]){
     //     console.log("user1 ssc", y1, y3);
     // })
 
-    it("new fish test", async () => {
-        console.log("new!");
-        await cat.newFish({from:user1});
-        var x = await cat.getFish({from:user1});
-        console.log(x[0]);
+    // it("new fish test", async () => {
+    //     console.log("new!");
+    //     await cat.newFish({from:user1});
+    //     var x = await cat.getFish({from:user1});
+    //     console.log(x[0]);
 
 
+    // })
+
+    it("feed cat test", async () => {
+
+        await cat.registerCat("test", {from:user1});
+        for(var i=0;i<1;i++){ 
+            var myCat = await cat.updateKittyId({from:user1});
+            console.log(myCat);
+        }
     })
 
 });
