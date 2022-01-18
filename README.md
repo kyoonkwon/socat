@@ -22,15 +22,19 @@
 
 백엔드는 이더리움 블록체인 네트워크에 배포하는 것으로 가정하고 진행하였음.
 
+초기에 ropsten test network에 배포하는 것을 목표로 하였으나, eth send transaction 오류가 발생하여 진행하지 못하였음.
+
 비용문제로 실제 이더리움 메인 네트워크에 배포하지 않고, 로컬에서 테스트만 진행하였음.
 
 코인은 openzeppelin의 ERC20을 상속하여 게임 기능에 맞게 수정하여 작성하였음.
 
+contract를 처음 배포한 노드를 owner 계정으로 설정하여, 최초 발행된 코인을 지급하며, 유저들이 게임플레이를 통하여 owner로부터 코인을 지급받는 방식.
 
+이더리움은 contract에 전송하고 발급받는 방식을 취함 
 
 게임 전체는 CatBase Solidity Contract를 통해 클라이언트와 상호작용할 수 있도록 하였음.
 
-초기에 ropsten test network에 배포하는 것을 목표로 하였으나, eth send transaction 오류가 발생하여 진행하지 못하였음.
+
 
 
 

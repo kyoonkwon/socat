@@ -137,15 +137,12 @@ contract CatBase is MyToken{
   function getFish() public view returns(uint32[] memory fish) {
     fish = fishList[msg.sender];
   }
-  // function getFish() public view returns(bool) {
-  //   return fishList[msg.sender].length == 1;
-  // }
 
-  function newFish() public returns(uint32) {
+  function newFish(uint32 newFish) public returns(uint32) {
     if (fishList[msg.sender].length == 0) {
       fishList[msg.sender] = [0,0,0,0,0,0];
     }
-    uint16 tmpFish = _makeRandom();
+    uint32 tmpFish = newFish;
     fishList[msg.sender][tmpFish] = fishList[msg.sender][tmpFish]+1;
     emit NewFish(tmpFish);
     return tmpFish;
