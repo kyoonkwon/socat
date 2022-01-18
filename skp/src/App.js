@@ -24,8 +24,8 @@ function App(props) {
   const [userETH, setUserETH] = useState(0);
   const [fishImg, setFishImg] = useState(0);
   const [script, setScript] = useState("안녕 반갑다냥");
-  const [savedFishImage, setSavedFishImage] = useState("");
-
+  const [savedFishImage,setSavedFishImage] = useState([]);
+  const [fishId,setFishId] = useState(0);
 
   useEffect(() => {
     getContract();
@@ -87,26 +87,26 @@ function App(props) {
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='static'>
- <Typography variant="h3" component="div" sx={{ flexGrow: 1 }} style = {{"font-family" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
+ <Typography variant="h3" component="div" sx={{ flexGrow: 1 }} style = {{"fontFamily" : "BMJUA", "backgroundColor" : "#C9F3F8", color:"black"}}>
              {`소소코인 잔고 ${(userSSC / (10 ** 18))}    이더리움 잔고 ${userETH / (10 ** 18)}`}
           </Typography>
         </AppBar>
       </Box>
       <Grid container style={{margin:"0 auto"}} direction="row" justifyContent="center" spacing={3}>
 
-        <Grid item direction="column" spacing={2} xs={3}>
+        <Grid item direction="column"  xs={3}>
           <Grid item style={{height:"500px"}}>
             <Profile script={script} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode}/>
           </Grid>
           <Grid item>
             <Paper elevation={3} style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"} }>
-              <Inventory style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"}} accounts={accounts} instance={instance}  setSavedFishImage={setSavedFishImage}/>
+              <Inventory style={{height:"200px", marginTop:"20px", padding:"0 0 0 0"}} accounts={accounts} instance={instance}  savedFishImage = {savedFishImage} setSavedFishImage={setSavedFishImage} setFishId={setFishId}/>
             </Paper>
           </Grid>
         </Grid>
 
 
-        <Grid item xs={6} direction="column" justifyContent="flex-start" spacing={3}>
+        <Grid item xs={6} direction="column" justifyContent="flex-start">
           <Paper style={{height:"630px", display:"flex", alignItems:"center"}}>
           <Grid container style={{margin:"0 auto", height:"100%"}} direction="row">
             {
@@ -114,7 +114,7 @@ function App(props) {
               <GameMain web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setFishImg={setFishImg}/>
               : mode === 1 ?
                 <FishingRod setUserSSC={setUserSSC} web3={web3} accounts={accounts} instance={instance} owner={owner} setMode={setMode} setRod={setRod}/> 
-                : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage}/>
+                : <Exchange updateBalance={getAccounts} web3={web3} accounts={accounts} instance={instance} owner={owner} savedFishImage = {savedFishImage} fishId={fishId}/>
               }
           </Grid>
           </Paper>
